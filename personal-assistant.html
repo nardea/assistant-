@@ -2,29 +2,34 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>העוזר האישי שלי</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&family=Noto+Sans+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="׳”׳¢׳•׳–׳¨ ׳©׳׳™">
+<title>׳”׳¢׳•׳–׳¨ ׳”׳׳™׳©׳™</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;-webkit-text-size-adjust:100%}
 
 :root {
-  --bg: #0d0d0f;
-  --surface: #17171b;
-  --surface2: #1f1f26;
-  --surface3: #26262f;
-  --border: #2a2a35;
-  --border2: #33333f;
-  --text: #f0f0f5;
-  --text2: #9090a8;
-  --text3: #5a5a70;
-  --accent: #7c6af7;
-  --accent2: #a897ff;
-  --green: #3ddc84;
-  --orange: #ff9f45;
-  --red: #ff5f5f;
-  --blue: #5ab4ff;
-  --pink: #ff6eb4;
+  --bg: #0a0a0d;
+  --s1: #131318;
+  --s2: #1a1a22;
+  --s3: #222230;
+  --b1: #252535;
+  --b2: #303045;
+  --text: #f2f2f8;
+  --t2: #8888aa;
+  --t3: #44445a;
+  --acc: #6c5ce7;
+  --acc2: #a29bfe;
+  --grn: #00cec9;
+  --org: #fdcb6e;
+  --red: #ff7675;
+  --pink: #fd79a8;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bot: env(safe-area-inset-bottom, 0px);
 }
 
 body {
@@ -32,1008 +37,1183 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-height: -webkit-fill-available;
   overflow-x: hidden;
 }
 
-/* BG effects */
-body::before {
-  content:'';
-  position:fixed;inset:0;
-  background: 
-    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(124,106,247,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 35% at 80% 90%, rgba(61,220,132,0.05) 0%, transparent 55%);
-  pointer-events:none;z-index:0;
-}
+/* ג”€ג”€ SCREENS ג”€ג”€ */
+.screen { display:none; flex-direction:column; min-height:100vh; padding-bottom:calc(80px + var(--safe-bot)); }
+.screen.active { display:flex; }
 
-.container {
-  width:100%;max-width:600px;
-  padding: 0 1rem 6rem;
-  position:relative;z-index:1;
+/* ג”€ג”€ TOP BAR ג”€ג”€ */
+.topbar {
+  padding: calc(var(--safe-top) + 16px) 20px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+  background: linear-gradient(to bottom, var(--bg) 70%, transparent);
 }
-
-/* Header */
-header {
-  padding: 2.5rem 0 1.5rem;
-  text-align:center;
-  animation: fadeDown 0.7s ease both;
-}
-.avatar {
-  width:60px;height:60px;
-  background: linear-gradient(135deg, var(--accent), #5040c8);
-  border-radius:20px;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:28px;margin-bottom:1rem;
-  box-shadow: 0 8px 32px rgba(124,106,247,0.35);
-}
-header h1 {
-  font-size:1.7rem;font-weight:900;
-  background: linear-gradient(135deg, var(--text) 30%, var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-header p { color:var(--text2); font-size:0.88rem; margin-top:0.3rem; }
-
-/* Notif bar */
-.notif-bar {
-  background: rgba(124,106,247,0.08);
-  border: 1px solid rgba(124,106,247,0.18);
-  border-radius:12px;
-  padding:0.6rem 1rem;
-  font-size:0.8rem;
-  color:var(--text2);
-  display:flex;align-items:center;gap:0.6rem;
-  cursor:pointer;
-  margin-bottom:1.2rem;
-  transition: border-color 0.2s;
-  animation: fadeUp 0.5s ease 0.1s both;
-}
-.notif-bar:hover { border-color: var(--accent); }
-.notif-dot { width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2s infinite; }
-.notif-bar span { flex:1; }
-.notif-status { font-weight:700;color:var(--accent2); }
-
-/* Chat input area */
-.chat-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius:20px;
-  padding:1.2rem;
-  margin-bottom:1.2rem;
-  animation: fadeUp 0.5s ease 0.15s both;
-}
-.chat-hint {
-  font-size:0.78rem;color:var(--text3);margin-bottom:0.7rem;
-  display:flex;align-items:center;gap:0.4rem;
-}
-.examples {
-  display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.9rem;
-}
-.example-chip {
-  background:var(--surface2);
-  border:1px solid var(--border2);
-  border-radius:20px;
-  padding:0.3rem 0.75rem;
-  font-size:0.75rem;color:var(--text2);
-  cursor:pointer;transition:all 0.15s;
-  font-family:'Heebo',sans-serif;
-}
-.example-chip:hover { border-color:var(--accent);color:var(--accent2);background:rgba(124,106,247,0.08); }
-
-.input-row {
-  display:flex;gap:0.6rem;align-items:flex-end;
-}
-.nlp-input {
-  flex:1;
-  background:var(--surface2);
-  border:1.5px solid var(--border);
-  border-radius:14px;
-  color:var(--text);
-  font-family:'Heebo',sans-serif;
-  font-size:1rem;
-  padding:0.75rem 1rem;
-  resize:none;
-  outline:none;
-  min-height:48px;max-height:120px;
-  direction:rtl;
-  line-height:1.4;
-  transition:border-color 0.2s,box-shadow 0.2s;
-}
-.nlp-input::placeholder{color:var(--text3)}
-.nlp-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(124,106,247,0.12); }
-
-.send-btn {
-  width:48px;height:48px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),#5040c8);
-  border:none;border-radius:14px;
-  color:white;font-size:1.2rem;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
-  box-shadow:0 4px 16px rgba(124,106,247,0.3);
-}
-.send-btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,106,247,0.4); }
-.send-btn:active { transform:translateY(0); }
-
-/* Parse preview */
-.parse-preview {
-  background: rgba(61,220,132,0.06);
-  border: 1px solid rgba(61,220,132,0.2);
-  border-radius:12px;
-  padding:0.8rem 1rem;
-  margin-top:0.8rem;
-  font-size:0.85rem;
-  display:none;
-  animation:fadeUp 0.3s ease both;
-}
-.parse-preview.show { display:block; }
-.parse-row { display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem; }
-.parse-row:last-child{margin-bottom:0}
-.parse-label { color:var(--text3);font-size:0.75rem;min-width:60px; }
-.parse-val { color:var(--green);font-weight:600; }
-.parse-actions { display:flex;gap:0.5rem;margin-top:0.8rem; }
-.btn-confirm {
-  background:linear-gradient(135deg,var(--green),#2ab868);
-  color:#000;font-family:'Heebo',sans-serif;font-weight:700;
-  border:none;border-radius:10px;padding:0.5rem 1.2rem;font-size:0.85rem;
-  cursor:pointer;transition:all 0.15s;flex:1;
-}
-.btn-confirm:hover { transform:translateY(-1px); }
-.btn-cancel-parse {
-  background:var(--surface3);border:1px solid var(--border2);
-  color:var(--text2);font-family:'Heebo',sans-serif;
-  border-radius:10px;padding:0.5rem 0.8rem;font-size:0.85rem;
-  cursor:pointer;transition:all 0.15s;
-}
-.btn-cancel-parse:hover { color:var(--text);border-color:var(--border); }
-
-/* Tabs */
-.tabs {
-  display:flex;gap:0.5rem;margin-bottom:1rem;
-  animation: fadeUp 0.5s ease 0.2s both;
-  overflow-x:auto;padding-bottom:2px;
-}
-.tabs::-webkit-scrollbar{display:none}
-.tab {
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:20px;padding:0.45rem 0.9rem;
-  font-family:'Heebo',sans-serif;font-size:0.8rem;font-weight:600;
-  color:var(--text2);cursor:pointer;
-  display:flex;align-items:center;gap:0.4rem;
-  white-space:nowrap;transition:all 0.15s;
-  position:relative;
-}
-.tab.active { background:var(--accent);border-color:var(--accent);color:white; box-shadow:0 4px 12px rgba(124,106,247,0.3); }
-.tab:not(.active):hover { border-color:var(--border2);color:var(--text); }
-.tab-count {
-  background:rgba(255,255,255,0.15);
-  border-radius:10px;padding:1px 6px;font-size:0.7rem;
-}
-.tab.active .tab-count { background:rgba(255,255,255,0.25); }
-
-/* Reminder cards */
-.section-header {
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:0.8rem;
-}
-.section-label { font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase; }
-.clear-done {
-  background:none;border:none;color:var(--text3);font-family:'Heebo',sans-serif;
-  font-size:0.75rem;cursor:pointer;padding:2px 6px;border-radius:6px;
-  transition:color 0.15s;
-}
-.clear-done:hover{color:var(--red)}
-
-.reminders-grid { display:flex;flex-direction:column;gap:0.7rem; }
-
-.reminder-card {
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:1rem 1.1rem;
-  display:flex;align-items:center;gap:0.9rem;
-  position:relative;
-  animation:fadeUp 0.3s ease both;
-  transition:border-color 0.2s, opacity 0.3s;
-  cursor:default;
-}
-.reminder-card:hover { border-color:var(--border2); }
-.reminder-card.done { opacity:0.42; }
-.reminder-card.firing {
-  border-color:var(--accent);
-  box-shadow: 0 0 0 3px rgba(124,106,247,0.15);
-  animation:cardPulse 0.8s ease 3;
-}
-
-@keyframes cardPulse {
-  0%,100%{box-shadow:0 0 0 3px rgba(124,106,247,0.15)}
-  50%{box-shadow:0 0 0 6px rgba(124,106,247,0.25)}
-}
-
-.cat-icon {
+.topbar-title { font-size:1.2rem; font-weight:900; }
+.topbar-sub { font-size:0.75rem; color:var(--t2); margin-top:1px; }
+.topbar-btn {
   width:40px;height:40px;border-radius:12px;
+  background:var(--s2);border:1px solid var(--b1);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;flex-shrink:0;
+  font-size:1.1rem;cursor:pointer;border:none;color:var(--text);
 }
-.cat-task    { background:rgba(90,180,255,0.12); }
-.cat-people  { background:rgba(255,110,180,0.12); }
-.cat-health  { background:rgba(61,220,132,0.12); }
-.cat-meeting { background:rgba(255,159,69,0.12); }
-.cat-other   { background:rgba(124,106,247,0.12); }
 
-.card-body { flex:1;min-width:0; }
-.card-msg {
-  font-size:0.95rem;font-weight:600;
+/* ג”€ג”€ BOTTOM NAV ג”€ג”€ */
+.bottom-nav {
+  position:fixed; bottom:0; left:0; right:0;
+  padding: 10px 20px calc(10px + var(--safe-bot));
+  background: rgba(10,10,13,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top:1px solid var(--b1);
+  display:flex; justify-content:space-around;
+  z-index:100;
+}
+.nav-item {
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;padding:4px 16px;border-radius:12px;
+  transition:all 0.2s;border:none;background:none;color:var(--t3);
+  font-family:'Heebo',sans-serif;
+}
+.nav-item.active { color:var(--acc2); }
+.nav-item .nav-icon { font-size:1.3rem; }
+.nav-item .nav-label { font-size:0.65rem;font-weight:700;letter-spacing:0.04em; }
+.nav-badge {
+  position:absolute;top:-2px;right:-2px;
+  background:var(--red);color:white;
+  width:16px;height:16px;border-radius:50%;
+  font-size:0.6rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-icon-wrap { position:relative; }
+
+/* ג”€ג”€ HOME SCREEN ג”€ג”€ */
+.morning-card {
+  margin:0 16px 16px;
+  background: linear-gradient(135deg, #1a1535, #0f1a2e);
+  border:1px solid rgba(108,92,231,0.25);
+  border-radius:20px; padding:20px;
+  position:relative; overflow:hidden;
+}
+.morning-card::before {
+  content:'';position:absolute;
+  top:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle, rgba(108,92,231,0.2) 0%, transparent 70%);
+}
+.morning-greeting { font-size:0.75rem;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:0.1em; }
+.morning-date { font-size:1.3rem;font-weight:900;margin:4px 0; }
+.morning-stats { display:flex;gap:12px;margin-top:14px; }
+.stat-pill {
+  background:rgba(255,255,255,0.06);border-radius:10px;
+  padding:8px 12px;flex:1;text-align:center;
+}
+.stat-num { font-size:1.4rem;font-weight:900;color:var(--acc2); }
+.stat-label { font-size:0.65rem;color:var(--t2);margin-top:2px; }
+
+.section-title {
+  font-size:0.72rem;font-weight:700;color:var(--t3);
+  text-transform:uppercase;letter-spacing:0.1em;
+  padding:0 20px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.section-title a {
+  color:var(--acc2);font-size:0.7rem;cursor:pointer;
+  text-transform:none;letter-spacing:0;
+}
+
+/* urgent strip */
+.urgent-strip {
+  display:flex;gap:10px;
+  padding:0 16px;margin-bottom:20px;
+  overflow-x:auto;
+}
+.urgent-strip::-webkit-scrollbar{display:none}
+.urgent-chip {
+  flex-shrink:0;
+  background:var(--s2);border:1px solid var(--b2);
+  border-radius:14px;padding:10px 14px;
+  min-width:150px;
+}
+.urgent-chip.hot { border-color:rgba(255,118,117,0.4);background:rgba(255,118,117,0.06); }
+.urgent-chip.warm { border-color:rgba(253,203,110,0.4);background:rgba(253,203,110,0.06); }
+.uc-time { font-size:0.7rem;color:var(--t2);margin-bottom:4px; }
+.uc-msg { font-size:0.85rem;font-weight:700;line-height:1.3; }
+.uc-cat { font-size:0.65rem;color:var(--t3);margin-top:4px; }
+
+/* ג”€ג”€ TASK LIST ג”€ג”€ */
+.tasks-scroll { padding:0 16px;display:flex;flex-direction:column;gap:8px; }
+
+.task-card {
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:16px;padding:14px 14px;
+  display:flex;align-items:center;gap:12px;
+  transition:all 0.2s;position:relative;
+  -webkit-tap-highlight-color:transparent;
+}
+.task-card:active { transform:scale(0.98); }
+.task-card.done { opacity:0.38; }
+.task-card.urgent { border-color:rgba(255,118,117,0.3); }
+.task-card.followup { border-color:rgba(253,203,110,0.25); }
+
+.task-check {
+  width:26px;height:26px;border-radius:8px;flex-shrink:0;
+  border:2px solid var(--b2);background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;font-size:0.8rem;
+}
+.task-check.checked { background:var(--grn);border-color:var(--grn);color:#000; }
+
+.task-body { flex:1;min-width:0; }
+.task-msg {
+  font-size:0.92rem;font-weight:600;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.reminder-card.done .card-msg { text-decoration:line-through;color:var(--text2); }
-.card-meta {
-  display:flex;align-items:center;gap:0.6rem;margin-top:0.25rem;
-}
-.time-pill {
-  font-size:0.72rem;font-weight:700;
-  padding:2px 8px;border-radius:20px;
-  display:inline-flex;align-items:center;gap:3px;
-}
-.time-pill.soon { background:rgba(255,95,95,0.15);color:var(--red); }
-.time-pill.today { background:rgba(255,159,69,0.15);color:var(--orange); }
-.time-pill.future { background:rgba(124,106,247,0.12);color:var(--accent2); }
-.time-pill.done-pill { background:rgba(61,220,132,0.1);color:var(--green); }
-.cat-label { font-size:0.7rem;color:var(--text3); }
+.task-card.done .task-msg { text-decoration:line-through;color:var(--t2); }
+.task-meta { display:flex;align-items:center;gap:6px;margin-top:3px; }
 
-.countdown-tiny {
-  font-size:0.68rem;color:var(--text3);
-  font-variant-numeric:tabular-nums;
+.pri-dot {
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
 }
+.pri-urgent .pri-dot { background:var(--red); }
+.pri-normal .pri-dot { background:var(--acc2); }
+.pri-low .pri-dot { background:var(--t3); }
 
-.card-actions { display:flex;gap:0.3rem;flex-shrink:0; }
-.icon-btn {
+.time-tag {
+  font-size:0.7rem;font-weight:700;
+  padding:1px 7px;border-radius:20px;
+}
+.time-tag.soon{background:rgba(255,118,117,0.15);color:var(--red);}
+.time-tag.today{background:rgba(253,203,110,0.12);color:var(--org);}
+.time-tag.future{background:rgba(108,92,231,0.12);color:var(--acc2);}
+.time-tag.done-tag{background:rgba(0,206,201,0.1);color:var(--grn);}
+.contact-tag{font-size:0.7rem;color:var(--t2);}
+
+.task-right { display:flex;gap:4px;flex-shrink:0; }
+.t-btn {
+  width:32px;height:32px;border-radius:9px;
   background:none;border:none;cursor:pointer;
-  padding:6px;border-radius:8px;font-size:0.95rem;
-  color:var(--text3);transition:all 0.15s;
+  font-size:0.9rem;color:var(--t3);
   display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;
 }
-.icon-btn:hover { background:var(--surface2);color:var(--text); }
-.icon-btn.wa:hover { background:rgba(37,211,102,0.12);color:#25D366; }
-.icon-btn.done-btn:hover { background:rgba(61,220,132,0.1);color:var(--green); }
-.icon-btn.del:hover { background:rgba(255,95,95,0.1);color:var(--red); }
+.t-btn:active{background:var(--s3);}
+.t-btn.wa:active{color:#25D366;}
+.t-btn.del:active{color:var(--red);}
 
-/* Countdown bar at top */
-.next-banner {
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:0.75rem 1rem;
-  margin-bottom:1rem;
-  display:flex;align-items:center;gap:0.8rem;
-  animation:fadeUp 0.5s ease 0.25s both;
-}
-.next-banner.hidden{display:none}
-.pulse-ring {
-  width:36px;height:36px;border-radius:50%;flex-shrink:0;
-  background:rgba(124,106,247,0.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;position:relative;
-}
-.pulse-ring::after {
-  content:'';position:absolute;inset:-4px;
-  border-radius:50%;border:2px solid rgba(124,106,247,0.3);
-  animation:ringPulse 2s infinite;
-}
-@keyframes ringPulse{0%{transform:scale(1);opacity:0.6}100%{transform:scale(1.4);opacity:0}}
-.next-label { font-size:0.72rem;color:var(--text3); }
-.next-title { font-size:0.92rem;font-weight:700; }
-.next-time { font-size:1.1rem;font-weight:900;color:var(--accent2);font-variant-numeric:tabular-nums;margin-right:auto; }
+/* ג”€ג”€ ADD SCREEN ג”€ג”€ */
+.add-screen { padding:0 16px; }
+.add-title { font-size:1.4rem;font-weight:900;padding:20px 20px 16px;text-align:center; }
 
-/* Empty */
-.empty { text-align:center;padding:3rem 1rem;color:var(--text3); }
-.empty-icon{font-size:3rem;margin-bottom:0.5rem;opacity:0.4}
-.empty p{font-size:0.9rem}
+.input-card {
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:20px;padding:16px;margin-bottom:12px;
+}
+.input-label { font-size:0.72rem;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px; }
+.nlp-area {
+  width:100%;background:var(--s2);border:1.5px solid var(--b1);
+  border-radius:14px;color:var(--text);
+  font-family:'Heebo',sans-serif;font-size:1rem;
+  padding:12px 14px;resize:none;outline:none;
+  min-height:56px;max-height:120px;direction:rtl;
+  transition:border-color 0.2s;
+}
+.nlp-area:focus{border-color:var(--acc);}
+.nlp-area::placeholder{color:var(--t3);}
 
-/* Modal */
-.overlay {
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;
-  z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s;
-}
-.overlay.open{opacity:1;pointer-events:all}
-.modal {
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:24px;
-  padding:2rem 1.8rem;
-  max-width:360px;width:90%;
-  text-align:center;
-  transform:scale(0.88) translateY(20px);
-  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow:0 24px 80px rgba(0,0,0,0.6);
-}
-.overlay.open .modal { transform:scale(1) translateY(0); }
-.modal-emoji{font-size:3.5rem;margin-bottom:0.8rem;display:block}
-.modal h2{font-size:1.3rem;font-weight:900;margin-bottom:0.5rem}
-.modal p{color:var(--text2);font-size:0.9rem;line-height:1.5;margin-bottom:1.5rem}
-.modal-btns{display:flex;gap:0.7rem}
-.modal-btns .btn{flex:1}
-.btn{
-  border:none;border-radius:12px;cursor:pointer;
-  font-family:'Heebo',sans-serif;font-weight:700;font-size:0.9rem;
-  padding:0.75rem 1rem;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;
-}
-.btn-accent{background:linear-gradient(135deg,var(--accent),#5040c8);color:white;box-shadow:0 4px 16px rgba(124,106,247,0.3)}
-.btn-accent:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(124,106,247,0.4)}
-.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);color:white;box-shadow:0 4px 16px rgba(37,211,102,0.25)}
-.btn-wa:hover{transform:translateY(-2px)}
-.btn-ghost{background:var(--surface2);border:1px solid var(--border2);color:var(--text2)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
-
-/* Snooze options */
-.snooze-opts{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;margin-bottom:1rem}
-.snooze-chip{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:20px;padding:0.3rem 0.8rem;
-  font-family:'Heebo',sans-serif;font-size:0.78rem;color:var(--text2);
+.chips-row { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px; }
+.chip {
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:20px;padding:5px 12px;
+  font-size:0.75rem;color:var(--t2);
   cursor:pointer;transition:all 0.15s;
+  font-family:'Heebo',sans-serif;
 }
-.snooze-chip:hover{border-color:var(--accent);color:var(--accent2)}
+.chip:active{border-color:var(--acc);color:var(--acc2);}
+.chip.sel{background:rgba(108,92,231,0.15);border-color:var(--acc);color:var(--acc2);}
 
-/* Edit modal */
-.edit-modal {
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:24px;
-  padding:1.8rem;
-  max-width:400px;width:94%;
-  transform:scale(0.88) translateY(20px);
-  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow:0 24px 80px rgba(0,0,0,0.6);
-}
-.overlay.open .edit-modal { transform:scale(1) translateY(0); }
-.edit-modal h2 { font-size:1.1rem;font-weight:900;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem; }
-.edit-field { display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem; }
-.edit-label { font-size:0.75rem;color:var(--text3);font-weight:600;letter-spacing:0.06em;text-transform:uppercase; }
-.edit-input, .edit-select {
-  background:var(--surface2);border:1.5px solid var(--border);
+.form-row { display:flex;gap:10px;margin-bottom:12px; }
+.form-group { flex:1;display:flex;flex-direction:column;gap:6px; }
+.form-input, .form-select {
+  background:var(--s2);border:1.5px solid var(--b1);
   border-radius:12px;color:var(--text);
-  font-family:'Heebo',sans-serif;font-size:0.95rem;
-  padding:0.65rem 0.9rem;outline:none;
-  transition:border-color 0.2s,box-shadow 0.2s;
-  direction:rtl;width:100%;
+  font-family:'Heebo',sans-serif;font-size:0.9rem;
+  padding:10px 12px;outline:none;direction:rtl;
+  transition:border-color 0.2s;width:100%;
 }
-.edit-input:focus,.edit-select:focus { border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,247,0.12); }
-.edit-select option { background:var(--surface2);color:var(--text); }
-.edit-row { display:flex;gap:0.7rem; }
-.edit-row .edit-field { flex:1; }
-.edit-btns { display:flex;gap:0.7rem;margin-top:1.2rem; }
-.edit-btns .btn { flex:1; }
+.form-input:focus,.form-select:focus{border-color:var(--acc);}
+.form-select option{background:var(--s2);}
 
-/* Toast */
-.toast {
-  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:14px;padding:0.7rem 1.3rem;
-  font-size:0.85rem;font-weight:600;color:var(--text);
-  box-shadow:0 8px 32px rgba(0,0,0,0.45);
-  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  z-index:300;white-space:nowrap;display:flex;align-items:center;gap:0.5rem;
+/* priority selector */
+.pri-row { display:flex;gap:8px;margin-bottom:12px; }
+.pri-btn {
+  flex:1;padding:9px;border-radius:12px;
+  background:var(--s2);border:1.5px solid var(--b1);
+  font-family:'Heebo',sans-serif;font-size:0.8rem;font-weight:700;
+  color:var(--t2);cursor:pointer;transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;gap:5px;
 }
-.toast.show{transform:translateX(-50%) translateY(0)}
+.pri-btn.sel-urgent{background:rgba(255,118,117,0.12);border-color:var(--red);color:var(--red);}
+.pri-btn.sel-normal{background:rgba(108,92,231,0.12);border-color:var(--acc);color:var(--acc2);}
+.pri-btn.sel-low{background:rgba(68,68,90,0.3);border-color:var(--b2);color:var(--t2);}
 
-@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+/* followup toggle */
+.followup-row {
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:14px;padding:12px 14px;
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;
+}
+.followup-row .fr-text { flex:1;font-size:0.85rem;font-weight:600; }
+.followup-row .fr-sub { font-size:0.72rem;color:var(--t2);margin-top:2px; }
+.toggle {
+  width:44px;height:26px;border-radius:13px;
+  background:var(--b2);position:relative;cursor:pointer;
+  transition:background 0.2s;flex-shrink:0;border:none;
+}
+.toggle.on{background:var(--acc);}
+.toggle::after{
+  content:'';position:absolute;top:3px;right:3px;
+  width:20px;height:20px;border-radius:50%;background:white;
+  transition:transform 0.2s;
+}
+.toggle.on::after{transform:translateX(-18px);}
+
+.parse-box {
+  background:rgba(0,206,201,0.05);
+  border:1px solid rgba(0,206,201,0.2);
+  border-radius:14px;padding:12px 14px;
+  margin-bottom:12px;display:none;
+}
+.parse-box.show{display:block;}
+.parse-item{display:flex;gap:8px;align-items:center;margin-bottom:6px;}
+.parse-item:last-child{margin-bottom:0}
+.pl{font-size:0.7rem;color:var(--t3);min-width:55px;}
+.pv{font-size:0.82rem;font-weight:700;color:var(--grn);}
+
+.btn-add {
+  width:100%;padding:15px;border-radius:16px;
+  background:linear-gradient(135deg,var(--acc),#4834d4);
+  color:white;font-family:'Heebo',sans-serif;
+  font-size:1rem;font-weight:900;border:none;cursor:pointer;
+  box-shadow:0 6px 24px rgba(108,92,231,0.35);
+  transition:all 0.2s;margin-bottom:12px;
+}
+.btn-add:active{transform:scale(0.98);}
+
+.recurring-opts {
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;
+}
+.rec-chip {
+  background:var(--s2);border:1.5px solid var(--b1);
+  border-radius:20px;padding:5px 12px;
+  font-size:0.75rem;color:var(--t2);
+  cursor:pointer;font-family:'Heebo',sans-serif;
+  transition:all 0.15s;
+}
+.rec-chip.sel{background:rgba(108,92,231,0.15);border-color:var(--acc);color:var(--acc2);}
+
+/* ג”€ג”€ HISTORY SCREEN ג”€ג”€ */
+.history-item {
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:14px;padding:12px 14px;
+  display:flex;align-items:center;gap:10px;margin-bottom:8px;
+  opacity:0.6;
+}
+.hi-icon{font-size:1.1rem;flex-shrink:0;}
+.hi-body{flex:1;min-width:0;}
+.hi-msg{font-size:0.85rem;font-weight:600;text-decoration:line-through;color:var(--t2);}
+.hi-date{font-size:0.7rem;color:var(--t3);margin-top:2px;}
+
+/* ג”€ג”€ EDIT OVERLAY ג”€ג”€ */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:200;display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.overlay.open{opacity:1;pointer-events:all;}
+.bottom-sheet {
+  width:100%;background:var(--s1);
+  border-radius:24px 24px 0 0;
+  padding:16px 20px calc(20px + var(--safe-bot));
+  transform:translateY(100%);
+  transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+  max-height:90vh;overflow-y:auto;
+}
+.overlay.open .bottom-sheet{transform:translateY(0);}
+.sheet-handle{width:40px;height:4px;border-radius:2px;background:var(--b2);margin:0 auto 20px;}
+.sheet-title{font-size:1.1rem;font-weight:900;margin-bottom:16px;}
+
+/* alert modal */
+.alert-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:300;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.alert-overlay.open{opacity:1;pointer-events:all;}
+.alert-box{
+  background:var(--s1);border:1px solid var(--b2);
+  border-radius:24px;padding:28px 24px;
+  max-width:320px;width:88%;text-align:center;
+  transform:scale(0.85);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.alert-overlay.open .alert-box{transform:scale(1);}
+.alert-emoji{font-size:3rem;margin-bottom:12px;display:block;}
+.alert-title{font-size:1.2rem;font-weight:900;margin-bottom:8px;}
+.alert-msg{color:var(--t2);font-size:0.88rem;line-height:1.5;margin-bottom:20px;}
+.alert-btns{display:flex;gap:10px;}
+.alert-btns button{
+  flex:1;padding:12px;border-radius:14px;
+  font-family:'Heebo',sans-serif;font-size:0.9rem;font-weight:700;
+  cursor:pointer;border:none;transition:all 0.15s;
+}
+.btn-done-alert{background:var(--s3);color:var(--t2);}
+.btn-wa-alert{background:linear-gradient(135deg,#25D366,#128C7E);color:white;}
+.snooze-row{display:flex;gap:6px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.snooze-btn{
+  background:var(--s2);border:1px solid var(--b2);
+  border-radius:20px;padding:5px 12px;
+  font-family:'Heebo',sans-serif;font-size:0.75rem;color:var(--t2);
+  cursor:pointer;border:none;
+}
+
+/* toast */
+.toast{
+  position:fixed;bottom:calc(90px + var(--safe-bot));left:50%;
+  transform:translateX(-50%) translateY(30px);
+  background:var(--s2);border:1px solid var(--b2);
+  border-radius:14px;padding:10px 18px;
+  font-size:0.85rem;font-weight:600;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  z-index:400;white-space:nowrap;
+  opacity:0;transition:all 0.3s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* empty */
+.empty-state{text-align:center;padding:40px 20px;color:var(--t3);}
+.empty-state .ei{font-size:3rem;margin-bottom:10px;opacity:0.4;}
+.empty-state p{font-size:0.88rem;line-height:1.6;}
+
+/* notif bar */
+.notif-strip{
+  margin:0 16px 12px;
+  background:rgba(108,92,231,0.07);
+  border:1px solid rgba(108,92,231,0.15);
+  border-radius:12px;padding:9px 14px;
+  display:flex;align-items:center;gap:8px;
+  cursor:pointer;
+}
+.notif-dot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0;animation:pulse 2s infinite;}
+.notif-strip span{flex:1;font-size:0.78rem;color:var(--t2);}
+.notif-strip strong{font-size:0.75rem;color:var(--acc2);}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
-<div class="container">
+<!-- HOME SCREEN -->
+<div class="screen active" id="screen-home">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="topGreeting">׳‘׳•׳§׳¨ ׳˜׳•׳‘ ג˜€ן¸</div>
+      <div class="topbar-sub" id="topDate">ג€”</div>
+    </div>
+    <button class="topbar-btn" onclick="reqNotif()">נ””</button>
+  </div>
 
-<header>
-  <div class="avatar">🧠</div>
-  <h1>העוזר האישי שלי</h1>
-  <p>כתוב בחופשיות — אני מבין הכל</p>
-</header>
+  <div class="notif-strip" id="notifStrip" onclick="reqNotif()">
+    <div class="notif-dot"></div>
+    <span id="notifText">׳׳—׳¥ ׳׳׳₪׳©׳¨ ׳”׳×׳¨׳׳•׳×</span>
+    <strong id="notifStatus">ג€”</strong>
+  </div>
 
-<div class="notif-bar" onclick="reqNotif()">
-  <div class="notif-dot"></div>
-  <span id="notifText">לחץ כדי לאפשר התראות ברקע</span>
-  <span class="notif-status" id="notifStatus">—</span>
+  <div class="morning-card">
+    <div class="morning-greeting">׳¡׳™׳›׳•׳ ׳™׳•׳</div>
+    <div class="morning-date" id="todayLabel">ג€”</div>
+    <div class="morning-stats">
+      <div class="stat-pill"><div class="stat-num" id="statPending">0</div><div class="stat-label">׳׳׳×׳™׳ ׳•׳×</div></div>
+      <div class="stat-pill"><div class="stat-num" id="statToday">0</div><div class="stat-label">׳׳”׳™׳•׳</div></div>
+      <div class="stat-pill"><div class="stat-num" id="statDone">0</div><div class="stat-label">׳”׳•׳©׳׳׳•</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    ׳“׳—׳•׳£ ׳¢׳›׳©׳™׳•
+    <span id="nextCountdown" style="color:var(--t2);font-variant-numeric:tabular-nums;font-size:0.8rem;letter-spacing:0;">ג€”</span>
+  </div>
+  <div class="urgent-strip" id="urgentStrip">
+    <div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">׳׳™׳ ׳×׳–׳›׳•׳¨׳•׳× ׳“׳—׳•׳₪׳•׳× נ‘</div>
+  </div>
+
+  <div class="section-title">׳›׳ ׳”׳׳©׳™׳׳•׳× <span onclick="goScreen('screen-tasks')">׳”׳›׳ ג†’</span></div>
+  <div class="tasks-scroll" id="homeTasksList"></div>
 </div>
 
-<!-- Next reminder banner -->
-<div class="next-banner hidden" id="nextBanner">
-  <div class="pulse-ring" id="nextIcon">⏰</div>
-  <div style="flex:1;min-width:0">
-    <div class="next-label">התזכורת הבאה</div>
-    <div class="next-title" id="nextTitle">—</div>
+<!-- TASKS SCREEN -->
+<div class="screen" id="screen-tasks">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">׳”׳׳©׳™׳׳•׳× ׳©׳׳™</div>
+      <div class="topbar-sub" id="taskCount">0 ׳₪׳¢׳™׳׳•׳×</div>
+    </div>
+    <button class="topbar-btn" onclick="clearDone()">נ§¹</button>
   </div>
-  <div class="next-time" id="nextTime">—</div>
+
+  <!-- filter tabs -->
+  <div style="display:flex;gap:8px;padding:0 16px;margin-bottom:14px;overflow-x:auto;" id="filterTabs">
+    <button class="chip sel" data-f="all" onclick="setFilter('all',this)">נ—‚ן¸ ׳”׳›׳</button>
+    <button class="chip" data-f="task" onclick="setFilter('task',this)">נ’¼ ׳׳©׳™׳׳•׳×</button>
+    <button class="chip" data-f="people" onclick="setFilter('people',this)">נ‘¥ ׳₪׳•׳׳• ׳׳₪</button>
+    <button class="chip" data-f="health" onclick="setFilter('health',this)">נ¥— ׳‘׳¨׳™׳׳•׳×</button>
+    <button class="chip" data-f="meeting" onclick="setFilter('meeting',this)">נ“… ׳₪׳’׳™׳©׳•׳×</button>
+  </div>
+
+  <div class="tasks-scroll" id="allTasksList"></div>
 </div>
 
-<!-- Input -->
-<div class="chat-box">
-  <div class="chat-hint">💡 כתוב בשפה רגילה, לדוגמה:</div>
-  <div class="examples" id="examples">
-    <span class="example-chip" onclick="fillExample(this)">תזכיר לי לשלוח הצעת מחיר לאיתי ב-14:00</span>
-    <span class="example-chip" onclick="fillExample(this)">לחזור לדני על הצעת השותפות בשעה 16:30</span>
-    <span class="example-chip" onclick="fillExample(this)">האם אכלתי צהריים? בשעה 13:00</span>
-    <span class="example-chip" onclick="fillExample(this)">תזכיר לי לשתות מים כל שעה</span>
-    <span class="example-chip" onclick="fillExample(this)">פגישה עם מנהל כספים מחר ב-10:00</span>
+<!-- ADD SCREEN -->
+<div class="screen" id="screen-add">
+  <div class="topbar">
+    <div class="topbar-title">׳×׳–׳›׳•׳¨׳× ׳—׳“׳©׳” ג¨</div>
   </div>
-  <div class="input-row">
-    <textarea class="nlp-input" id="nlpInput" placeholder="תזכיר לי ל..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this);liveparse(this.value)"></textarea>
-    <button class="send-btn" onclick="handleSend()">➤</button>
+  <div style="padding:0 16px;">
+
+    <div class="input-card">
+      <div class="input-label">׳׳” ׳׳”׳–׳›׳™׳¨?</div>
+      <textarea class="nlp-area" id="nlpInput" placeholder="׳›׳×׳•׳‘ ׳‘׳—׳•׳₪׳©׳™׳•׳×... &#10;׳׳׳©׳: ׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳‘-16:30" rows="2"
+        oninput="autoResize(this);liveparse(this.value)" onkeydown="handleKey(event)"></textarea>
+
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;" id="exampleChips">
+        <span class="chip" onclick="fillEx('׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳¢׳ ׳”׳¦׳¢׳× ׳”׳©׳•׳×׳₪׳•׳× ׳‘-16:30')">׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳‘-16:30</span>
+        <span class="chip" onclick="fillEx('׳”׳׳ ׳׳›׳׳×׳™ ׳¦׳”׳¨׳™׳™׳? ׳‘׳©׳¢׳” 13:00')">׳׳›׳׳×׳™ ׳¦׳”׳¨׳™׳™׳? 13:00</span>
+        <span class="chip" onclick="fillEx('׳₪׳’׳™׳©׳” ׳¢׳ ׳׳§׳•׳— ׳׳—׳¨ ׳‘-10:00')">׳₪׳’׳™׳©׳” ׳׳—׳¨ ׳‘-10</span>
+        <span class="chip" onclick="fillEx('׳׳©׳׳•׳— ׳“׳•׳— ׳›׳¡׳₪׳™ ׳‘-17:00')">׳“׳•׳— ׳›׳¡׳₪׳™ ׳‘-17:00</span>
+      </div>
+    </div>
+
+    <div class="parse-box" id="parseBox">
+      <div class="parse-item"><span class="pl">נ“ ׳׳”:</span><span class="pv" id="ppMsg">ג€”</span></div>
+      <div class="parse-item"><span class="pl">נ“‚ ׳§׳˜׳’׳•׳¨׳™׳”:</span><span class="pv" id="ppCat">ג€”</span></div>
+      <div class="parse-item"><span class="pl">נ• ׳׳×׳™:</span><span class="pv" id="ppTime">ג€”</span></div>
+    </div>
+
+    <!-- ׳׳™׳© ׳§׳©׳¨ -->
+    <div class="input-card">
+      <div class="input-label">נ‘₪ ׳׳™׳© ׳§׳©׳¨ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)</div>
+      <input class="form-input" id="contactName" placeholder="׳©׳ ג€” ׳׳׳©׳: ׳“׳ ׳™, ׳׳™׳×׳™, ׳©׳¨׳”..." type="text">
+      <div style="margin-top:8px;">
+        <input class="form-input" id="contactPhone" placeholder="׳׳¡׳₪׳¨ ׳˜׳׳₪׳•׳ (׳׳₪׳×׳™׳—׳× WhatsApp)" type="tel">
+      </div>
+    </div>
+
+    <!-- ׳×׳׳¨׳™׳ ׳•׳©׳¢׳” -->
+    <div class="input-card">
+      <div class="input-label">נ• ׳׳×׳™?</div>
+      <div class="form-row">
+        <div class="form-group">
+          <div style="font-size:0.72rem;color:var(--t3);">׳×׳׳¨׳™׳</div>
+          <input class="form-input" id="dateInput" type="date">
+        </div>
+        <div class="form-group">
+          <div style="font-size:0.72rem;color:var(--t3);">׳©׳¢׳”</div>
+          <input class="form-input" id="timeInput" type="time">
+        </div>
+      </div>
+
+      <div style="font-size:0.72rem;color:var(--t3);margin-bottom:6px;">׳—׳•׳–׳¨ ׳¢׳ ׳¢׳¦׳׳•?</div>
+      <div class="recurring-opts" id="recurringOpts">
+        <span class="rec-chip" data-r="0" onclick="selRecurring(this,0)">׳₪׳¢׳ ׳׳—׳×</span>
+        <span class="rec-chip" data-r="60" onclick="selRecurring(this,60)">׳›׳ ׳©׳¢׳”</span>
+        <span class="rec-chip" data-r="1440" onclick="selRecurring(this,1440)">׳›׳ ׳™׳•׳</span>
+        <span class="rec-chip" data-r="10080" onclick="selRecurring(this,10080)">׳›׳ ׳©׳‘׳•׳¢</span>
+        <span class="rec-chip" data-r="custom-3" onclick="selRecurring(this,'custom-3')">׳›׳ 3 ׳׳—׳•׳“׳©</span>
+        <span class="rec-chip" data-r="custom-4" onclick="selRecurring(this,'custom-4')">׳›׳ 4 ׳׳—׳•׳“׳©</span>
+      </div>
+    </div>
+
+    <!-- ׳§׳˜׳’׳•׳¨׳™׳” + ׳¢׳“׳™׳₪׳•׳× -->
+    <div class="input-card">
+      <div class="input-label" style="margin-bottom:10px;">נ“‚ ׳§׳˜׳’׳•׳¨׳™׳”</div>
+      <select class="form-select" id="catSelect" style="margin-bottom:12px;">
+        <option value="task">נ’¼ ׳׳©׳™׳׳” / ׳¢׳‘׳•׳“׳”</option>
+        <option value="people">נ‘¥ ׳₪׳•׳׳• ׳׳₪ / ׳׳—׳–׳•׳¨ ׳׳׳ ׳©׳™׳</option>
+        <option value="health">נ¥— ׳‘׳¨׳™׳׳•׳× / ׳׳›׳™׳׳”</option>
+        <option value="meeting">נ“… ׳₪׳’׳™׳©׳” / ׳׳™׳¨׳•׳¢</option>
+        <option value="finance">נ’° ׳›׳¡׳₪׳™׳ / ׳“׳™׳•׳•׳—</option>
+        <option value="other">נ“ ׳׳—׳¨</option>
+      </select>
+
+      <div class="input-label" style="margin-bottom:8px;">ג¡ ׳¢׳“׳™׳₪׳•׳×</div>
+      <div class="pri-row" id="priRow">
+        <button class="pri-btn" data-p="urgent" onclick="selPri(this,'urgent')">נ”´ ׳“׳—׳•׳£</button>
+        <button class="pri-btn sel-normal" data-p="normal" onclick="selPri(this,'normal')">נ”µ ׳¨׳’׳™׳</button>
+        <button class="pri-btn" data-p="low" onclick="selPri(this,'low')">ג× ׳ ׳׳•׳</button>
+      </div>
+    </div>
+
+    <!-- ׳₪׳•׳׳• ׳׳₪ -->
+    <div class="followup-row">
+      <div>
+        <div class="fr-text">נ”„ ׳₪׳•׳׳• ׳׳₪ ׳׳•׳˜׳•׳׳˜׳™</div>
+        <div class="fr-sub">׳×׳–׳›׳™׳¨ ׳׳™ ׳©׳•׳‘ ׳׳ ׳׳ ׳¡׳™׳׳ ׳×׳™ ׳›׳‘׳•׳¦׳¢</div>
+      </div>
+      <button class="toggle" id="followupToggle" onclick="this.classList.toggle('on')"></button>
+    </div>
+
+    <button class="btn-add" onclick="addFromForm()">ג“ ׳©׳׳•׳¨ ׳×׳–׳›׳•׳¨׳×</button>
   </div>
-  <div class="parse-preview" id="parsePreview">
-    <div class="parse-row"><span class="parse-label">📝 מה:</span> <span class="parse-val" id="ppMsg">—</span></div>
-    <div class="parse-row"><span class="parse-label">📂 קטגוריה:</span> <span class="parse-val" id="ppCat">—</span></div>
-    <div class="parse-row"><span class="parse-label">🕐 מתי:</span> <span class="parse-val" id="ppTime">—</span></div>
-    <div class="parse-actions">
-      <button class="btn-confirm" onclick="confirmAdd()">✓ שמור תזכורת</button>
-      <button class="btn-cancel-parse" onclick="cancelParse()">ביטול</button>
+</div>
+
+<!-- HISTORY SCREEN -->
+<div class="screen" id="screen-history">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">׳”׳™׳¡׳˜׳•׳¨׳™׳”</div>
+      <div class="topbar-sub">׳׳” ׳”׳•׳©׳׳</div>
+    </div>
+    <button class="topbar-btn" onclick="clearHistory()">נ—‘ן¸</button>
+  </div>
+  <div style="padding:0 16px;" id="historyList"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-item active" id="nav-home" onclick="goScreen('screen-home')">
+    <div class="nav-icon-wrap"><span class="nav-icon">נ </span></div>
+    <span class="nav-label">׳‘׳™׳×</span>
+  </button>
+  <button class="nav-item" id="nav-tasks" onclick="goScreen('screen-tasks')">
+    <div class="nav-icon-wrap">
+      <span class="nav-icon">נ“‹</span>
+      <span class="nav-badge" id="taskBadge" style="display:none">0</span>
+    </div>
+    <span class="nav-label">׳׳©׳™׳׳•׳×</span>
+  </button>
+  <button class="nav-item" id="nav-add" onclick="goScreen('screen-add')">
+    <div class="nav-icon-wrap" style="background:linear-gradient(135deg,var(--acc),#4834d4);border-radius:14px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;">
+      <span class="nav-icon" style="font-size:1.5rem;">ן¼‹</span>
+    </div>
+    <span class="nav-label">׳”׳•׳¡׳£</span>
+  </button>
+  <button class="nav-item" id="nav-history" onclick="goScreen('screen-history')">
+    <div class="nav-icon-wrap"><span class="nav-icon">נ“</span></div>
+    <span class="nav-label">׳”׳™׳¡׳˜׳•׳¨׳™׳”</span>
+  </button>
+</div>
+
+<!-- ALERT MODAL -->
+<div class="alert-overlay" id="alertOverlay">
+  <div class="alert-box">
+    <span class="alert-emoji" id="alertEmoji">ג°</span>
+    <div class="alert-title" id="alertTitle">׳”׳’׳™׳¢ ׳”׳–׳׳!</div>
+    <div class="alert-msg" id="alertMsg">ג€”</div>
+    <div class="snooze-row">
+      <button class="snooze-btn" onclick="snooze(5)">׳“׳—׳” 5 ׳“׳§'</button>
+      <button class="snooze-btn" onclick="snooze(15)">׳“׳—׳” 15 ׳“׳§'</button>
+      <button class="snooze-btn" onclick="snooze(60)">׳“׳—׳” ׳©׳¢׳”</button>
+    </div>
+    <div class="alert-btns">
+      <button class="btn-done-alert" onclick="dismissAlert(true)">ג“ ׳‘׳•׳¦׳¢</button>
+      <button class="btn-wa-alert" id="alertWABtn" onclick="alertOpenWA()">נ’¬ WhatsApp</button>
     </div>
   </div>
 </div>
 
-<!-- Tabs -->
-<div class="tabs" id="tabs">
-  <div class="tab active" data-filter="all" onclick="setFilter('all')">🗂️ הכל <span class="tab-count" id="cnt-all">0</span></div>
-  <div class="tab" data-filter="task" onclick="setFilter('task')">💼 משימות <span class="tab-count" id="cnt-task">0</span></div>
-  <div class="tab" data-filter="people" onclick="setFilter('people')">👥 אנשים <span class="tab-count" id="cnt-people">0</span></div>
-  <div class="tab" data-filter="health" onclick="setFilter('health')">🥗 בריאות <span class="tab-count" id="cnt-health">0</span></div>
-  <div class="tab" data-filter="meeting" onclick="setFilter('meeting')">📅 פגישות <span class="tab-count" id="cnt-meeting">0</span></div>
-</div>
-
-<div class="section-header">
-  <span class="section-label" id="sectionLabel">כל התזכורות</span>
-  <button class="clear-done" onclick="clearDone()">נקה הושלמו</button>
-</div>
-
-<div class="reminders-grid" id="remindersGrid"></div>
-
-</div><!-- /container -->
-
-<!-- Firing modal -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <span class="modal-emoji" id="mEmoji">⏰</span>
-    <h2 id="mTitle">הגיע הזמן!</h2>
-    <p id="mMsg">—</p>
-    <div class="snooze-opts">
-      <span class="snooze-chip" onclick="snooze(5)">דחה 5 דק'</span>
-      <span class="snooze-chip" onclick="snooze(15)">דחה 15 דק'</span>
-      <span class="snooze-chip" onclick="snooze(60)">דחה שעה</span>
+<!-- EDIT SHEET -->
+<div class="overlay" id="editOverlay" onclick="if(event.target===this)closeEdit()">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">גן¸ ׳¢׳¨׳™׳›׳× ׳×׳–׳›׳•׳¨׳×</div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <div class="input-label">׳׳”</div>
+      <input class="form-input" id="eMsg" type="text">
     </div>
-    <div class="modal-btns">
-      <button class="btn btn-ghost" onclick="closeModal(true)">✓ בוצע</button>
-      <button class="btn btn-wa" id="waBtn" onclick="openWA()">📲 WhatsApp</button>
+    <div class="form-group" style="margin-bottom:12px;">
+      <div class="input-label">׳׳™׳© ׳§׳©׳¨</div>
+      <input class="form-input" id="eContact" type="text" placeholder="׳©׳ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)">
     </div>
-  </div>
-</div>
-
-<!-- Edit modal -->
-<div class="overlay" id="editOverlay">
-  <div class="edit-modal">
-    <h2>✏️ עריכת תזכורת</h2>
-    <div class="edit-field">
-      <span class="edit-label">מה להזכיר</span>
-      <input class="edit-input" id="editMsg" type="text" placeholder="תוכן התזכורת">
+    <div class="form-group" style="margin-bottom:12px;">
+      <div class="input-label">׳˜׳׳₪׳•׳</div>
+      <input class="form-input" id="ePhone" type="tel" placeholder="׳׳¡׳₪׳¨ WhatsApp">
     </div>
-    <div class="edit-field">
-      <span class="edit-label">קטגוריה</span>
-      <select class="edit-select" id="editCat">
-        <option value="task">💼 משימה</option>
-        <option value="people">👥 לחזור לאנשים</option>
-        <option value="health">🥗 בריאות / אכילה</option>
-        <option value="meeting">📅 פגישה</option>
-        <option value="other">📌 אחר</option>
+    <div class="form-row" style="margin-bottom:12px;">
+      <div class="form-group"><div class="input-label">׳×׳׳¨׳™׳</div><input class="form-input" id="eDate" type="date"></div>
+      <div class="form-group"><div class="input-label">׳©׳¢׳”</div><input class="form-input" id="eTime" type="time"></div>
+    </div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <div class="input-label">׳§׳˜׳’׳•׳¨׳™׳”</div>
+      <select class="form-select" id="eCat">
+        <option value="task">נ’¼ ׳׳©׳™׳׳”</option>
+        <option value="people">נ‘¥ ׳₪׳•׳׳• ׳׳₪</option>
+        <option value="health">נ¥— ׳‘׳¨׳™׳׳•׳×</option>
+        <option value="meeting">נ“… ׳₪׳’׳™׳©׳”</option>
+        <option value="finance">נ’° ׳›׳¡׳₪׳™׳</option>
+        <option value="other">נ“ ׳׳—׳¨</option>
       </select>
     </div>
-    <div class="edit-row">
-      <div class="edit-field">
-        <span class="edit-label">תאריך</span>
-        <input class="edit-input" id="editDate" type="date">
-      </div>
-      <div class="edit-field">
-        <span class="edit-label">שעה</span>
-        <input class="edit-input" id="editTime" type="time">
+    <div class="form-group" style="margin-bottom:16px;">
+      <div class="input-label">׳¢׳“׳™׳₪׳•׳×</div>
+      <div class="pri-row" id="ePriRow">
+        <button class="pri-btn" data-p="urgent" onclick="eSelPri(this,'urgent')">נ”´ ׳“׳—׳•׳£</button>
+        <button class="pri-btn" data-p="normal" onclick="eSelPri(this,'normal')">נ”µ ׳¨׳’׳™׳</button>
+        <button class="pri-btn" data-p="low" onclick="eSelPri(this,'low')">ג× ׳ ׳׳•׳</button>
       </div>
     </div>
-    <div class="edit-btns">
-      <button class="btn btn-ghost" onclick="closeEditModal()">ביטול</button>
-      <button class="btn btn-accent" onclick="saveEdit()">💾 שמור</button>
-    </div>
-  </div>
-</div>
-
-<!-- Edit modal -->
-<div class="overlay" id="editOverlay">
-  <div class="edit-modal">
-    <h2>✏️ עריכת תזכורת</h2>
-    <div class="edit-field">
-      <span class="edit-label">מה להזכיר</span>
-      <input class="edit-input" id="editMsg" type="text" placeholder="תוכן התזכורת">
-    </div>
-    <div class="edit-field">
-      <span class="edit-label">קטגוריה</span>
-      <select class="edit-select" id="editCat">
-        <option value="task">💼 משימה</option>
-        <option value="people">👥 לחזור לאנשים</option>
-        <option value="health">🥗 בריאות / אכילה</option>
-        <option value="meeting">📅 פגישה</option>
-        <option value="other">📌 אחר</option>
-      </select>
-    </div>
-    <div class="edit-row">
-      <div class="edit-field">
-        <span class="edit-label">תאריך</span>
-        <input class="edit-input" id="editDate" type="date">
-      </div>
-      <div class="edit-field">
-        <span class="edit-label">שעה</span>
-        <input class="edit-input" id="editTime" type="time">
-      </div>
-    </div>
-    <div class="edit-btns">
-      <button class="btn btn-ghost" onclick="closeEditModal()">ביטול</button>
-      <button class="btn btn-accent" onclick="saveEdit()">💾 שמור</button>
-    </div>
+    <button class="btn-add" onclick="saveEdit()">נ’¾ ׳©׳׳•׳¨ ׳©׳™׳ ׳•׳™׳™׳</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // DATA
-// ============================================================
-let reminders = JSON.parse(localStorage.getItem('pa_reminders_v2') || '[]');
-let filter = 'all';
-let pendingParsed = null;
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+let reminders = JSON.parse(localStorage.getItem('pa_v3') || '[]');
+let history = JSON.parse(localStorage.getItem('pa_v3_hist') || '[]');
+let currentFilter = 'all';
 let firingId = null;
+let editingId = null;
+let selectedRecurring = 0;
+let selectedPri = 'normal';
+let ePri = 'normal';
 
 const CATS = {
-  task:    { label:'משימה',  icon:'💼', cls:'cat-task' },
-  people:  { label:'אנשים',  icon:'👥', cls:'cat-people' },
-  health:  { label:'בריאות', icon:'🥗', cls:'cat-health' },
-  meeting: { label:'פגישה',  icon:'📅', cls:'cat-meeting' },
-  other:   { label:'אחר',   icon:'📌', cls:'cat-other' },
+  task:    {icon:'נ’¼',label:'׳׳©׳™׳׳”'},
+  people:  {icon:'נ‘¥',label:'׳₪׳•׳׳• ׳׳₪'},
+  health:  {icon:'נ¥—',label:'׳‘׳¨׳™׳׳•׳×'},
+  meeting: {icon:'נ“…',label:'׳₪׳’׳™׳©׳”'},
+  finance: {icon:'נ’°',label:'׳›׳¡׳₪׳™׳'},
+  other:   {icon:'נ“',label:'׳׳—׳¨'},
 };
 
-function save() { localStorage.setItem('pa_reminders_v2', JSON.stringify(reminders)); }
+function save() {
+  localStorage.setItem('pa_v3', JSON.stringify(reminders));
+  localStorage.setItem('pa_v3_hist', JSON.stringify(history));
+}
 
-// ============================================================
-// PARSING
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// NAVIGATION
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function goScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const navId = 'nav-' + id.replace('screen-','');
+  document.getElementById(navId)?.classList.add('active');
+  if(id==='screen-home') renderHome();
+  if(id==='screen-tasks') renderTasks();
+  if(id==='screen-history') renderHistory();
+  window.scrollTo(0,0);
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// PARSE
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 function parseInput(txt) {
-  if (!txt.trim()) return null;
+  if(!txt.trim()) return null;
   const now = new Date();
-  let fireAt = null;
-  let msg = txt;
+  let fireAt = null, msg = txt;
 
-  // time patterns: "ב-14:00" "בשעה 14:00" "ב14:00" "14:00"
-  const timeRx = /\b(?:ב-?|בשעה\s*)(\d{1,2}):(\d{2})\b/;
+  const timeRx = /\b(?:׳‘-?|׳‘׳©׳¢׳”\s*)(\d{1,2}):(\d{2})\b/;
   const m = txt.match(timeRx);
-  if (m) {
-    const d = new Date();
-    d.setHours(+m[1], +m[2], 0, 0);
-    if (d <= now) d.setDate(d.getDate()+1);
-    fireAt = d.getTime();
-    msg = txt.replace(timeRx,'').replace(/\s{2,}/g,' ').trim();
+  if(m){
+    const d=new Date(); d.setHours(+m[1],+m[2],0,0);
+    if(d<=now) d.setDate(d.getDate()+1);
+    fireAt=d.getTime();
+    msg=txt.replace(timeRx,'').replace(/\s{2,}/g,' ').trim();
   }
-
-  // "מחר ב-10" pattern without minutes
-  const tmShort = txt.match(/\b(?:ב-?|בשעה\s*)(\d{1,2})\b/);
-  if (!fireAt && tmShort) {
-    const d = new Date();
-    d.setHours(+tmShort[1], 0, 0, 0);
-    if (d <= now) d.setDate(d.getDate()+1);
-    fireAt = d.getTime();
-    msg = txt.replace(tmShort[0],'').replace(/\s{2,}/g,' ').trim();
+  const tmS = txt.match(/\b(?:׳‘-?|׳‘׳©׳¢׳”\s*)(\d{1,2})\b/);
+  if(!fireAt&&tmS){
+    const d=new Date(); d.setHours(+tmS[1],0,0,0);
+    if(d<=now) d.setDate(d.getDate()+1);
+    fireAt=d.getTime();
+    msg=txt.replace(tmS[0],'').replace(/\s{2,}/g,' ').trim();
   }
-
-  // "מחר" without time => tomorrow 9am
-  if (txt.includes('מחר') && !fireAt) {
-    const d = new Date(); d.setDate(d.getDate()+1); d.setHours(9,0,0,0);
-    fireAt = d.getTime();
-    msg = msg.replace('מחר','').replace(/\s{2,}/g,' ').trim();
+  if(txt.includes('׳׳—׳¨')&&!fireAt){
+    const d=new Date(); d.setDate(d.getDate()+1); d.setHours(9,0,0,0);
+    fireAt=d.getTime();
+    msg=msg.replace('׳׳—׳¨','').replace(/\s{2,}/g,' ').trim();
   }
+  if(!fireAt) fireAt=Date.now()+10*60*1000;
 
-  // "כל שעה" recurring
-  let recurring = null;
-  if (txt.includes('כל שעה')) { recurring = 60; if(!fireAt){const d=new Date();d.setHours(d.getHours()+1,0,0,0);fireAt=d.getTime();} }
-  if (txt.includes('כל חצי שעה')||txt.includes('כל 30 דקות')) { recurring=30; }
+  msg=msg.replace(/^(׳×׳–׳›׳™׳¨ ׳׳™ ׳?|׳×׳–׳›׳™׳¨ ׳׳™|׳׳”׳–׳›׳™׳¨ ׳׳™|׳׳—׳–׳•׳¨ ׳?|׳”׳׳|׳¦׳¨׳™׳ ׳?)/i,'').trim();
+  if(!msg) msg=txt;
 
-  // Default: 10 minutes from now
-  if (!fireAt) { fireAt = Date.now() + 10*60*1000; }
+  let cat='other';
+  const l=txt;
+  if(/׳׳—׳–׳•׳¨|׳׳”׳©׳™׳‘|׳׳¢׳ ׳•׳×|׳׳₪׳ ׳•׳×|׳׳”׳×׳§׳©׳¨|׳׳›׳×׳•׳‘ ׳|׳׳“׳‘׳¨ ׳¢׳|׳׳¢׳“׳›׳|׳₪׳•׳׳•/.test(l)) cat='people';
+  else if(/׳׳׳›׳•׳|׳׳©׳×׳•׳×|׳¦׳”׳¨׳™׳™׳|׳׳¨׳•׳—׳”|׳׳™׳|׳•׳™׳˜׳׳™׳|׳×׳¨׳•׳₪׳”|׳‘׳¨׳™׳׳•׳×|׳¡׳₪׳•׳¨׳˜|׳׳™׳©׳•׳|׳׳”׳×׳׳׳/.test(l)) cat='health';
+  else if(/׳₪׳’׳™׳©׳”|׳™׳©׳™׳‘׳”|׳¨׳׳™׳•׳|׳©׳™׳—׳” ׳¢׳|zoom|teams|׳§׳₪׳” ׳¢׳/.test(l)) cat='meeting';
+  else if(/׳׳©׳›׳•׳¨׳×|׳“׳™׳•׳•׳—|׳—׳©׳‘׳•׳ ׳™׳×|׳×׳©׳׳•׳|׳׳©׳׳|׳׳—׳×׳•׳|׳׳”׳’׳™׳©|׳׳¡/.test(l)) cat='finance';
+  else if(/׳׳©׳׳•׳—|׳׳¡׳™׳™׳|׳׳›׳×׳•׳‘|׳׳‘׳ ׳•׳×|׳׳”׳›׳™׳|׳׳‘׳“׳•׳§|׳׳׳©׳¨/.test(l)) cat='task';
 
-  // Strip common prefixes
-  msg = msg.replace(/^(תזכיר לי ל?|תזכיר לי|להזכיר לי ל?|לזכור ל?|לחזור ל?|האם|צריך ל?)/i,'').trim();
-  if (!msg) msg = txt.replace(timeRx,'').trim();
+  // extract contact name
+  let contact = '';
+  const contactRx = /׳([׳-׳×]{2,10})\s+(?:׳¢׳|׳‘׳ ׳•׳’׳¢|׳‘-|׳‘׳©׳¢׳”|$)/;
+  const cm = txt.match(contactRx);
+  if(cm) contact = cm[1];
 
-  // Categorize
-  let cat = 'other';
-  const low = txt.toLowerCase();
-  if (/לחזור|להשיב|לענות|לפנות|לשלוח הצ|להתקשר|לקרוא ל|לכתוב ל|לדבר עם|לעדכן/.test(low)) cat='people';
-  else if (/לאכול|לשתות|לאכל|צהריים|ארוחה|מים|ויטמין|תרופה|תרופות|בריאות|ספורט|לישון|לנוח|להתאמן/.test(low)) cat='health';
-  else if (/פגישה|ישיבה|ראיון|שיחה עם|meeting|zoom|teams|קפה עם/.test(low)) cat='meeting';
-  else if (/לשלוח|לסיים|לכתוב|לצלם|לבנות|לעדכן|להכין|לסקור|לבדוק|להגיש|לאשר|לשלם|לחתום/.test(low)) cat='task';
-
-  return { msg, cat, fireAt, recurring };
+  return {msg, cat, fireAt, contact};
 }
 
-let parseDebounce;
+let parseTimer;
 function liveparse(val) {
-  clearTimeout(parseDebounce);
-  if (!val.trim()) { hideParse(); return; }
-  parseDebounce = setTimeout(() => {
-    const p = parseInput(val);
-    if (!p) { hideParse(); return; }
-    pendingParsed = p;
-    document.getElementById('ppMsg').textContent = p.msg || val;
-    document.getElementById('ppCat').textContent = CATS[p.cat].icon + ' ' + CATS[p.cat].label;
-    const d = new Date(p.fireAt);
-    document.getElementById('ppTime').textContent = formatDateTime(d);
-    document.getElementById('parsePreview').classList.add('show');
-  }, 400);
+  clearTimeout(parseTimer);
+  const box = document.getElementById('parseBox');
+  if(!val.trim()){box.classList.remove('show');return;}
+  parseTimer = setTimeout(()=>{
+    const p=parseInput(val);
+    if(!p){box.classList.remove('show');return;}
+    document.getElementById('ppMsg').textContent=p.msg;
+    document.getElementById('ppCat').textContent=CATS[p.cat].icon+' '+CATS[p.cat].label;
+    document.getElementById('ppTime').textContent=fmtDT(new Date(p.fireAt));
+    box.classList.add('show');
+    // auto-fill fields
+    const d=new Date(p.fireAt);
+    document.getElementById('dateInput').value=d.toISOString().split('T')[0];
+    document.getElementById('timeInput').value=d.toTimeString().slice(0,5);
+    document.getElementById('catSelect').value=p.cat;
+    if(p.contact) document.getElementById('contactName').value=p.contact;
+  },350);
 }
 
-function hideParse() {
-  document.getElementById('parsePreview').classList.remove('show');
-  pendingParsed = null;
-}
-
-function confirmAdd() {
-  if (!pendingParsed) return;
-  addReminder(pendingParsed);
-  document.getElementById('nlpInput').value = '';
-  hideParse();
-}
-
-function cancelParse() {
-  hideParse();
-  document.getElementById('nlpInput').focus();
-}
-
-function handleSend() {
-  const val = document.getElementById('nlpInput').value.trim();
-  if (!val) return;
-  if (pendingParsed) { confirmAdd(); return; }
-  const p = parseInput(val);
-  if (p) {
-    pendingParsed = p;
-    confirmAdd();
-  }
-}
-
-function handleKey(e) {
-  if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); handleSend(); }
-}
-
-function autoResize(el) {
-  el.style.height='auto';
-  el.style.height=Math.min(el.scrollHeight,120)+'px';
-}
-
-function fillExample(el) {
-  document.getElementById('nlpInput').value = el.textContent;
+function fillEx(txt) {
+  document.getElementById('nlpInput').value=txt;
   autoResize(document.getElementById('nlpInput'));
-  liveparse(el.textContent);
-  document.getElementById('nlpInput').focus();
+  liveparse(txt);
 }
 
-// ============================================================
-// REMINDERS CRUD
-// ============================================================
-function addReminder(parsed) {
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();addFromForm();}}
+
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ADD
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function selRecurring(el, val) {
+  document.querySelectorAll('.rec-chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedRecurring = val;
+}
+
+function selPri(el, val) {
+  document.querySelectorAll('#priRow .pri-btn').forEach(b=>{b.className='pri-btn';});
+  el.classList.add('sel-'+val);
+  selectedPri = val;
+}
+
+function eSelPri(el, val) {
+  document.querySelectorAll('#ePriRow .pri-btn').forEach(b=>{b.className='pri-btn';});
+  el.classList.add('sel-'+val);
+  ePri = val;
+}
+
+function addFromForm() {
+  const txt = document.getElementById('nlpInput').value.trim();
+  const contact = document.getElementById('contactName').value.trim();
+  const phone = document.getElementById('contactPhone').value.trim().replace(/\D/g,'');
+  const date = document.getElementById('dateInput').value;
+  const time = document.getElementById('timeInput').value;
+  const cat = document.getElementById('catSelect').value;
+  const followup = document.getElementById('followupToggle').classList.contains('on');
+
+  if(!txt) {showToast('גן¸ ׳›׳×׳•׳‘ ׳׳” ׳׳”׳–׳›׳™׳¨');return;}
+
+  let fireAt;
+  if(date&&time) {
+    fireAt = new Date(date+'T'+time).getTime();
+  } else {
+    const p=parseInput(txt);
+    fireAt = p ? p.fireAt : Date.now()+10*60*1000;
+  }
+
+  // handle monthly recurring
+  let recurringType = selectedRecurring;
+
   const r = {
     id: Date.now(),
-    msg: parsed.msg,
-    cat: parsed.cat,
-    fireAt: parsed.fireAt,
-    recurring: parsed.recurring || null,
-    fired: false,
-    done: false,
+    msg: txt.replace(/^(׳×׳–׳›׳™׳¨ ׳׳™ ׳?|׳×׳–׳›׳™׳¨ ׳׳™)/i,'').trim() || txt,
+    cat, priority: selectedPri,
+    fireAt, fired:false, done:false,
+    contact: contact||'',
+    phone: phone||'',
+    recurring: recurringType,
+    followup,
+    followupSent: false,
+    createdAt: Date.now(),
   };
+
   reminders.push(r);
   reminders.sort((a,b)=>a.fireAt-b.fireAt);
-  save();
-  render();
-  showToast('✅ תזכורת נשמרה — ' + formatTime(new Date(r.fireAt)));
-  if (Notification.permission==='default') reqNotif();
+  save(); renderAll();
+
+  // reset form
+  document.getElementById('nlpInput').value='';
+  document.getElementById('contactName').value='';
+  document.getElementById('contactPhone').value='';
+  document.getElementById('parseBox').classList.remove('show');
+  document.getElementById('followupToggle').classList.remove('on');
+  selPri(document.querySelector('#priRow [data-p="normal"]'),'normal');
+  selRecurring(document.querySelector('.rec-chip[data-r="0"]'),0);
+  initDateTime();
+
+  showToast('ג… ׳×׳–׳›׳•׳¨׳× ׳ ׳©׳׳¨׳”!');
+  goScreen('screen-home');
+
+  if(Notification.permission==='default') reqNotif();
 }
 
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// EDIT
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function openEdit(id) {
+  const r=reminders.find(x=>x.id===id); if(!r) return;
+  editingId=id;
+  document.getElementById('eMsg').value=r.msg;
+  document.getElementById('eContact').value=r.contact||'';
+  document.getElementById('ePhone').value=r.phone||'';
+  const d=new Date(r.fireAt);
+  document.getElementById('eDate').value=d.toISOString().split('T')[0];
+  document.getElementById('eTime').value=d.toTimeString().slice(0,5);
+  document.getElementById('eCat').value=r.cat;
+  ePri=r.priority||'normal';
+  document.querySelectorAll('#ePriRow .pri-btn').forEach(b=>{b.className='pri-btn';});
+  document.querySelector(`#ePriRow [data-p="${ePri}"]`)?.classList.add('sel-'+ePri);
+  document.getElementById('editOverlay').classList.add('open');
+}
+
+function closeEdit(){document.getElementById('editOverlay').classList.remove('open');editingId=null;}
+
+function saveEdit() {
+  const r=reminders.find(x=>x.id===editingId); if(!r) return;
+  r.msg=document.getElementById('eMsg').value.trim()||r.msg;
+  r.contact=document.getElementById('eContact').value.trim();
+  r.phone=document.getElementById('ePhone').value.trim().replace(/\D/g,'');
+  r.cat=document.getElementById('eCat').value;
+  r.priority=ePri;
+  const date=document.getElementById('eDate').value;
+  const time=document.getElementById('eTime').value;
+  if(date&&time){r.fireAt=new Date(date+'T'+time).getTime();r.fired=false;r.done=false;}
+  save(); renderAll(); closeEdit();
+  showToast('ג… ׳¢׳•׳“׳›׳!');
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// DONE / DELETE
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 function markDone(id) {
-  const r = reminders.find(x=>x.id===id);
-  if (r) { r.done=!r.done; save(); render(); }
+  const r=reminders.find(x=>x.id===id); if(!r) return;
+  r.done=!r.done;
+  if(r.done) {
+    history.unshift({msg:r.msg,cat:r.cat,contact:r.contact,doneAt:Date.now()});
+    if(history.length>100) history=history.slice(0,100);
+  }
+  save(); renderAll();
 }
 
 function deleteReminder(id) {
-  reminders = reminders.filter(x=>x.id!==id);
-  save(); render();
-  showToast('🗑️ נמחקה');
+  reminders=reminders.filter(x=>x.id!==id);
+  save(); renderAll();
+  showToast('נ—‘ן¸ ׳ ׳׳—׳§׳”');
 }
 
 function clearDone() {
-  reminders = reminders.filter(x=>!x.done&&!x.fired);
-  save(); render();
-  showToast('✨ ניקוי הושלם');
+  reminders=reminders.filter(x=>!x.done&&!x.fired);
+  save(); renderAll();
+  showToast('ג¨ ׳ ׳™׳§׳•׳™ ׳”׳•׳©׳׳');
+}
+
+function clearHistory() {
+  history=[];save();renderHistory();
+  showToast('נ—‘ן¸ ׳”׳™׳¡׳˜׳•׳¨׳™׳” ׳ ׳•׳§׳×׳”');
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// WA
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function openWA(id) {
+  const r=reminders.find(x=>x.id===id); if(!r) return;
+  const phone=r.phone?(r.phone.startsWith('0')?'972'+r.phone.slice(1):r.phone):'';
+  const txt=encodeURIComponent(r.msg);
+  window.open(phone?`https://wa.me/${phone}?text=${txt}`:`https://wa.me/?text=${txt}`,'_blank');
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// FIRE
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function checkFire() {
+  const now=Date.now();
+  reminders.forEach(r=>{
+    if(!r.done&&!r.fired&&r.fireAt<=now&&!document.getElementById('alertOverlay').classList.contains('open')) {
+      fireAlert(r);
+    }
+    // followup: if done=false and fired=true, send followup after 2h
+    if(r.followup&&!r.done&&r.fired&&!r.followupSent&&(now-r.fireAt)>7200000) {
+      r.followupSent=true; save();
+      fireAlert(r, true);
+    }
+  });
+}
+
+function fireAlert(r, isFollowup=false) {
+  firingId=r.id;
+  const cat=CATS[r.cat]||CATS.other;
+  document.getElementById('alertEmoji').textContent=isFollowup?'נ”„':cat.icon;
+  document.getElementById('alertTitle').textContent=isFollowup?'׳₪׳•׳׳• ׳׳₪ ג€” ׳¢׳“׳™׳™׳ ׳׳ ׳‘׳•׳¦׳¢':'׳”׳’׳™׳¢ ׳”׳–׳׳!';
+  let msg=r.msg;
+  if(r.contact) msg+=` (${r.contact})`;
+  document.getElementById('alertMsg').textContent=msg;
+  document.getElementById('alertOverlay').classList.add('open');
+
+  // sound
+  try {
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [[880,0],[1100,150],[880,300]].forEach(([freq,delay])=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=freq;o.type='sine';
+      g.gain.setValueAtTime(0.25,ctx.currentTime+delay/1000);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.4);
+      o.start(ctx.currentTime+delay/1000);o.stop(ctx.currentTime+delay/1000+0.5);
+    });
+  } catch(e){}
+
+  if(Notification.permission==='granted') {
+    new Notification(cat.icon+' '+( isFollowup?'׳₪׳•׳׳• ׳׳₪':'׳×׳–׳›׳•׳¨׳×'), {body:msg});
+  }
+
+  r.fired=true;
+  // handle recurring
+  if(r.recurring&&r.recurring!==0) {
+    if(r.recurring==='custom-3') {
+      const d=new Date(); d.setDate(3); if(d<=new Date()) d.setMonth(d.getMonth()+1);
+      r.fireAt=d.getTime(); r.fired=false;
+    } else if(r.recurring==='custom-4') {
+      const d=new Date(); d.setDate(4); if(d<=new Date()) d.setMonth(d.getMonth()+1);
+      r.fireAt=d.getTime(); r.fired=false;
+    } else {
+      r.fireAt=Date.now()+Number(r.recurring)*60*1000; r.fired=false;
+    }
+  }
+  save(); renderAll();
 }
 
 function snooze(mins) {
-  const r = reminders.find(x=>x.id===firingId);
-  if (r) { r.fireAt=Date.now()+mins*60*1000; r.fired=false; save(); render(); }
-  closeModal(false);
-  showToast(`⏰ נדחה ב-${mins} דקות`);
+  const r=reminders.find(x=>x.id===firingId); if(!r) return;
+  r.fireAt=Date.now()+mins*60*1000; r.fired=false;
+  save(); renderAll();
+  dismissAlert(false);
+  showToast(`ג° ׳ ׳“׳—׳” ׳‘-${mins} ׳“׳§׳•׳×`);
 }
 
-// ============================================================
+function alertOpenWA() {
+  const r=reminders.find(x=>x.id===firingId); if(!r) return;
+  openWA(r.id); dismissAlert(true);
+}
+
+function dismissAlert(markDone) {
+  document.getElementById('alertOverlay').classList.remove('open');
+  if(markDone&&firingId) {
+    const r=reminders.find(x=>x.id===firingId);
+    if(r){r.done=true;history.unshift({msg:r.msg,cat:r.cat,contact:r.contact,doneAt:Date.now()});save();renderAll();}
+  }
+  firingId=null;
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // RENDER
-// ============================================================
-function setFilter(f) {
-  filter=f;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
-  const labels={all:'כל התזכורות',task:'משימות',people:'לחזור לאנשים',health:'בריאות ואכילה',meeting:'פגישות'};
-  document.getElementById('sectionLabel').textContent=labels[f]||'תזכורות';
-  render();
-}
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function renderAll(){renderHome();renderTasks();renderHistory();updateBadge();}
 
-function render() {
-  const grid = document.getElementById('remindersGrid');
-  const now = Date.now();
-  
-  // update counts
-  const cats=['task','people','health','meeting'];
+function renderHome() {
+  const now=Date.now();
   const active=reminders.filter(r=>!r.done&&!r.fired);
-  document.getElementById('cnt-all').textContent=active.length;
-  cats.forEach(c=>document.getElementById('cnt-'+c).textContent=active.filter(r=>r.cat===c).length);
+  const todayItems=reminders.filter(r=>!r.done&&isSameDay(new Date(r.fireAt),new Date()));
+  const doneToday=history.filter(h=>isSameDay(new Date(h.doneAt),new Date()));
 
-  // next banner
-  const pending=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt);
-  const nb=document.getElementById('nextBanner');
-  if(pending.length){
-    nb.classList.remove('hidden');
-    const nx=pending[0];
-    document.getElementById('nextIcon').textContent=CATS[nx.cat].icon;
-    document.getElementById('nextTitle').textContent=nx.msg;
-  } else {
-    nb.classList.add('hidden');
+  document.getElementById('statPending').textContent=active.length;
+  document.getElementById('statToday').textContent=todayItems.length;
+  document.getElementById('statDone').textContent=doneToday.length;
+
+  // urgent strip
+  const urgent=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt).slice(0,5);
+  const us=document.getElementById('urgentStrip');
+  if(!urgent.length){us.innerHTML='<div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">׳׳™׳ ׳×׳–׳›׳•׳¨׳•׳× ׳§׳¨׳•׳‘׳•׳× נ‘</div>';}
+  else {
+    us.innerHTML=urgent.map(r=>{
+      const diff=r.fireAt-now;
+      const cls=diff<3600000?'hot':diff<86400000?'warm':'';
+      return `<div class="urgent-chip ${cls}" onclick="openEdit(${r.id})">
+        <div class="uc-time">${fmtDT(new Date(r.fireAt))}</div>
+        <div class="uc-msg">${escH(r.msg)}</div>
+        <div class="uc-cat">${CATS[r.cat]?.icon||'נ“'} ${r.contact?'ֲ· '+r.contact:''}</div>
+      </div>`;
+    }).join('');
   }
 
-  // filter
-  let shown=reminders;
-  if(filter!=='all') shown=reminders.filter(r=>r.cat===filter);
-  shown=[...shown].sort((a,b)=>{
+  // home task list (next 5)
+  const next=reminders.filter(r=>!r.done).sort((a,b)=>a.fireAt-b.fireAt).slice(0,5);
+  document.getElementById('homeTasksList').innerHTML=next.length
+    ? next.map(r=>taskCardHTML(r)).join('')
+    : '<div class="empty-state"><div class="ei">נ</div><p>׳׳™׳ ׳׳©׳™׳׳•׳× ׳₪׳¢׳™׳׳•׳×<br>׳׳—׳¥ + ׳׳”׳•׳¡׳™׳£</p></div>';
+}
+
+function renderTasks() {
+  const list=document.getElementById('allTasksList');
+  let shown=currentFilter==='all'?[...reminders]:reminders.filter(r=>r.cat===currentFilter);
+  shown.sort((a,b)=>{
     if(a.done!==b.done) return a.done?1:-1;
+    const pa={urgent:0,normal:1,low:2};
+    if(!a.done&&pa[a.priority]!==pa[b.priority]) return (pa[a.priority]||1)-(pa[b.priority]||1);
     return a.fireAt-b.fireAt;
   });
+  const active=reminders.filter(r=>!r.done&&!r.fired);
+  document.getElementById('taskCount').textContent=active.length+' ׳₪׳¢׳™׳׳•׳×';
+  list.innerHTML=shown.length?shown.map(r=>taskCardHTML(r)).join(''):'<div class="empty-state"><div class="ei">ג¨</div><p>׳׳™׳ ׳׳©׳™׳׳•׳× ׳›׳׳</p></div>';
+}
 
-  if(!shown.length){
-    grid.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><p>אין תזכורות כאן<br>הוסף אחת למעלה</p></div>`;
-    return;
-  }
+function taskCardHTML(r) {
+  const now=Date.now();
+  const d=new Date(r.fireAt);
+  const diff=r.fireAt-now;
+  let tCls='future',tTxt=fmtDT(d);
+  if(r.done){tCls='done-tag';tTxt='׳”׳•׳©׳׳ ג“';}
+  else if(r.fired){tCls='done-tag';tTxt='׳¢׳‘׳¨';}
+  else if(diff<0){tCls='soon';tTxt='׳¢׳‘׳¨ '+fmtT(d);}
+  else if(diff<3600000){tCls='soon';tTxt='׳‘׳§׳¨׳•׳‘ '+fmtT(d);}
+  else if(isSameDay(d,new Date())){tCls='today';tTxt='׳”׳™׳•׳ '+fmtT(d);}
 
-  grid.innerHTML = shown.map(r=>{
-    const cat=CATS[r.cat];
-    const d=new Date(r.fireAt);
-    const diff=r.fireAt-now;
-    let pillCls='future',pillTxt=formatDateTime(d);
-    if(r.done){pillCls='done-pill';pillTxt='הושלם ✓';}
-    else if(r.fired){pillCls='done-pill';pillTxt='נשלח ✓';}
-    else if(diff<0){pillCls='soon';pillTxt='עבר '+formatTime(d);}
-    else if(diff<3600000){pillCls='soon';pillTxt='בקרוב — '+formatTime(d);}
-    else if(isSameDay(d,new Date())){pillCls='today';pillTxt='היום '+formatTime(d);}
+  const cat=CATS[r.cat]||CATS.other;
+  const priCls=r.priority==='urgent'?'urgent':r.cat==='people'?'followup':'';
 
-    const countdown = (!r.done&&!r.fired&&diff>0&&diff<3600000)
-      ? `<span class="countdown-tiny" id="cd-${r.id}">${fmtMs(diff)}</span>` : '';
-
-    return `<div class="reminder-card ${r.done?'done':''}" id="rc-${r.id}">
-      <div class="cat-icon ${cat.cls}">${cat.icon}</div>
-      <div class="card-body">
-        <div class="card-msg">${escHtml(r.msg)}</div>
-        <div class="card-meta">
-          <span class="time-pill ${pillCls}">${pillTxt}</span>
-          <span class="cat-label">${cat.label}</span>
-          ${countdown}
-        </div>
+  return `<div class="task-card ${r.done?'done':''} ${priCls}" id="tc-${r.id}">
+    <button class="task-check ${r.done?'checked':''}" onclick="markDone(${r.id})">${r.done?'ג“':''}</button>
+    <div class="task-body">
+      <div class="task-msg">${escH(r.msg)}</div>
+      <div class="task-meta">
+        <div class="pri-dot" style="background:${r.priority==='urgent'?'var(--red)':r.priority==='low'?'var(--t3)':'var(--acc2)'}"></div>
+        <span class="time-tag ${tCls}">${tTxt}</span>
+        ${r.contact?`<span class="contact-tag">נ‘₪ ${escH(r.contact)}</span>`:''}
+        <span style="font-size:0.68rem;color:var(--t3);">${cat.icon}</span>
       </div>
-      <div class="card-actions">
-        <button class="icon-btn" title="ערוך" onclick="openEdit(${r.id})">✏️</button>
-        <button class="icon-btn wa" title="שלח ב-WhatsApp" onclick="sendWADirect(${r.id})">💬</button>
-        <button class="icon-btn done-btn" title="סמן כבוצע" onclick="markDone(${r.id})">${r.done?'↩️':'✓'}</button>
-        <button class="icon-btn del" title="מחק" onclick="deleteReminder(${r.id})">🗑️</button>
+    </div>
+    <div class="task-right">
+      ${r.phone||r.contact?`<button class="t-btn wa" onclick="openWA(${r.id})">נ’¬</button>`:''}
+      <button class="t-btn" onclick="openEdit(${r.id})">גן¸</button>
+      <button class="t-btn del" onclick="deleteReminder(${r.id})">נ—‘ן¸</button>
+    </div>
+  </div>`;
+}
+
+function renderHistory() {
+  const list=document.getElementById('historyList');
+  if(!history.length){list.innerHTML='<div class="empty-state"><div class="ei">נ“­</div><p>׳׳™׳ ׳”׳™׳¡׳˜׳•׳¨׳™׳” ׳¢׳“׳™׳™׳</p></div>';return;}
+  list.innerHTML=history.slice(0,50).map(h=>{
+    const cat=CATS[h.cat]||CATS.other;
+    return `<div class="history-item">
+      <span class="hi-icon">${cat.icon}</span>
+      <div class="hi-body">
+        <div class="hi-msg">${escH(h.msg)}${h.contact?' ('+escH(h.contact)+')':''}</div>
+        <div class="hi-date">${fmtDT(new Date(h.doneAt))}</div>
       </div>
     </div>`;
   }).join('');
 }
 
-function sendWADirect(id) {
-  const r=reminders.find(x=>x.id===id);
-  if(!r)return;
-  const text=encodeURIComponent(r.msg);
-  window.open(`https://wa.me/?text=${text}`,'_blank');
+function updateBadge() {
+  const n=reminders.filter(r=>!r.done&&!r.fired&&r.priority==='urgent').length;
+  const b=document.getElementById('taskBadge');
+  b.style.display=n>0?'flex':'none';
+  b.textContent=n;
 }
 
-// ============================================================
-// FIRING
-// ============================================================
-function checkFire() {
-  const now=Date.now();
-  reminders.forEach(r=>{
-    if(!r.done&&!r.fired&&r.fireAt<=now&&!document.getElementById('overlay').classList.contains('open')) {
-      fire(r);
-    }
-  });
+function setFilter(f,el) {
+  currentFilter=f;
+  document.querySelectorAll('#filterTabs .chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  renderTasks();
 }
 
-function fire(r) {
-  firingId=r.id;
-  const cat=CATS[r.cat];
-  document.getElementById('mEmoji').textContent=cat.icon;
-  document.getElementById('mTitle').textContent='הגיע הזמן!';
-  document.getElementById('mMsg').textContent=r.msg;
-  document.getElementById('overlay').classList.add('open');
-  document.getElementById('rc-'+r.id)?.classList.add('firing');
-
-  // sound
-  try {
-    const ctx=new (window.AudioContext||window.webkitAudioContext)();
-    [0,150,300].forEach(delay=>{
-      const osc=ctx.createOscillator();const g=ctx.createGain();
-      osc.connect(g);g.connect(ctx.destination);
-      osc.frequency.value=880;osc.type='sine';
-      g.gain.setValueAtTime(0.3,ctx.currentTime+delay/1000);
-      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.4);
-      osc.start(ctx.currentTime+delay/1000);osc.stop(ctx.currentTime+delay/1000+0.5);
-    });
-  } catch(e){}
-
-  // browser notif
-  if(Notification.permission==='granted'){
-    new Notification(`${cat.icon} תזכורת`, {body:r.msg});
-  }
-
-  // mark fired (but snooze can reset)
-  r.fired=true;
-  if(r.recurring){r.fireAt=Date.now()+r.recurring*60*1000;r.fired=false;}
-  save(); render();
-}
-
-function openWA() {
-  const r=reminders.find(x=>x.id===firingId);
-  if(!r)return;
-  window.open(`https://wa.me/?text=${encodeURIComponent(r.msg)}`,'_blank');
-  closeModal(true);
-}
-
-function closeModal(markDoneFlag) {
-  document.getElementById('overlay').classList.remove('open');
-  if(markDoneFlag&&firingId){
-    const r=reminders.find(x=>x.id===firingId);
-    if(r){r.done=true;save();render();}
-  }
-  document.querySelectorAll('.reminder-card.firing').forEach(el=>el.classList.remove('firing'));
-  firingId=null;
-}
-
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // TICKER
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 setInterval(()=>{
   checkFire();
-  // update countdowns
+  // countdown
   const now=Date.now();
-  reminders.forEach(r=>{
-    if(!r.done&&!r.fired){
-      const diff=r.fireAt-now;
-      const el=document.getElementById('cd-'+r.id);
-      if(el){
-        if(diff>0&&diff<3600000) el.textContent=fmtMs(diff);
-        else if(diff<=0) render();
-      }
-    }
-  });
-  // next banner countdown
-  const pending=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt);
-  if(pending.length){
-    const diff=pending[0].fireAt-now;
-    document.getElementById('nextTime').textContent=diff<3600000?fmtMs(diff):formatDateTime(new Date(pending[0].fireAt));
-  }
+  const next=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt)[0];
+  const el=document.getElementById('nextCountdown');
+  if(next){const d=next.fireAt-now;el.textContent=d<3600000?fmtMs(d):fmtDT(new Date(next.fireAt));}
+  else el.textContent='׳׳™׳ ׳׳׳×׳™׳ ׳•׳×';
 },1000);
 
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // NOTIFICATIONS
-// ============================================================
-function reqNotif() {
-  if(!('Notification' in window))return;
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function reqNotif(){
+  if(!('Notification' in window)) return;
   if(Notification.permission==='granted'){updateNotifUI();return;}
   Notification.requestPermission().then(()=>updateNotifUI());
 }
 function updateNotifUI(){
-  const p=('Notification' in window)?Notification.permission:'unsupported';
-  const el=document.getElementById('notifText');
-  const st=document.getElementById('notifStatus');
-  if(p==='granted'){el.textContent='התראות מופעלות — תקבל ניוד גם ברקע';st.textContent='✓ פעיל';}
-  else if(p==='denied'){el.textContent='התראות חסומות — לחץ לאפשר דרך הדפדפן';st.textContent='✗ חסום';}
-  else{el.textContent='לחץ לאפשר התראות ברקע';st.textContent='לחץ';}
+  const p=('Notification' in window)?Notification.permission:'no';
+  document.getElementById('notifText').textContent=
+    p==='granted'?'׳”׳×׳¨׳׳•׳× ׳₪׳¢׳™׳׳•׳× ג€” ׳×׳§׳‘׳ ׳ ׳™׳•׳“ ׳’׳ ׳‘׳¨׳§׳¢':
+    p==='denied'?'׳”׳×׳¨׳׳•׳× ׳—׳¡׳•׳׳•׳×':
+    '׳׳—׳¥ ׳׳׳₪׳©׳¨ ׳”׳×׳¨׳׳•׳×';
+  document.getElementById('notifStatus').textContent=p==='granted'?'ג“ ׳₪׳¢׳™׳':p==='denied'?'ג—':'׳׳—׳¥';
+  if(p==='granted') document.getElementById('notifStrip').style.opacity='0.5';
 }
 
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // UTILS
-// ============================================================
-function formatTime(d){return d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}
-function formatDateTime(d){
-  const today=new Date();const tm=formatTime(d);
-  if(isSameDay(d,today)) return 'היום '+tm;
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+function fmtT(d){return d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}
+function fmtDT(d){
+  const today=new Date();
+  if(isSameDay(d,today)) return '׳”׳™׳•׳ '+fmtT(d);
   const tom=new Date(today);tom.setDate(tom.getDate()+1);
-  if(isSameDay(d,tom)) return 'מחר '+tm;
-  return d.toLocaleDateString('he-IL',{day:'numeric',month:'numeric'})+' '+tm;
+  if(isSameDay(d,tom)) return '׳׳—׳¨ '+fmtT(d);
+  return d.toLocaleDateString('he-IL',{day:'numeric',month:'numeric'})+' '+fmtT(d);
 }
 function isSameDay(a,b){return a.toDateString()===b.toDateString();}
-function fmtMs(ms){const m=Math.floor(ms/60000);const s=Math.floor((ms%60000)/1000);return`${m}:${String(s).padStart(2,'0')}`;}
-function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtMs(ms){const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000);return`${m}:${String(s).padStart(2,'0')}`;}
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-// ============================================================
+function initDateTime(){
+  const n=new Date(); n.setMinutes(n.getMinutes()+10);
+  document.getElementById('dateInput').value=n.toISOString().split('T')[0];
+  document.getElementById('timeInput').value=n.toTimeString().slice(0,5);
+}
+
+function updateTopbar(){
+  const h=new Date().getHours();
+  const g=h<12?'׳‘׳•׳§׳¨ ׳˜׳•׳‘ ג˜€ן¸':h<17?'׳¦׳”׳¨׳™׳™׳ ׳˜׳•׳‘׳™׳ נ₪':h<21?'׳¢׳¨׳‘ ׳˜׳•׳‘ נ†':'׳׳™׳׳” ׳˜׳•׳‘ נ™';
+  document.getElementById('topGreeting').textContent=g;
+  const d=new Date();
+  document.getElementById('topDate').textContent=d.toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('todayLabel').textContent=d.toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
 // INIT
-// ============================================================
+// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+updateTopbar();
 updateNotifUI();
-render();
-
-// ============================================================
-// EDIT
-// ============================================================
-let editingId = null;
-
-function openEdit(id) {
-  const r = reminders.find(x=>x.id===id);
-  if (!r) return;
-  editingId = id;
-  document.getElementById('editMsg').value = r.msg;
-  document.getElementById('editCat').value = r.cat;
-  const d = new Date(r.fireAt);
-  document.getElementById('editDate').value = d.toISOString().split('T')[0];
-  document.getElementById('editTime').value = d.toTimeString().slice(0,5);
-  document.getElementById('editOverlay').classList.add('open');
-}
-
-function closeEditModal() {
-  document.getElementById('editOverlay').classList.remove('open');
-  editingId = null;
-}
-
-function saveEdit() {
-  const r = reminders.find(x=>x.id===editingId);
-  if (!r) return;
-  const msg = document.getElementById('editMsg').value.trim();
-  const cat = document.getElementById('editCat').value;
-  const date = document.getElementById('editDate').value;
-  const time = document.getElementById('editTime').value;
-  if (!msg) { showToast('כתוב מה להזכיר'); return; }
-  if (!date||!time) { showToast('בחר תאריך ושעה'); return; }
-  r.msg = msg;
-  r.cat = cat;
-  r.fireAt = new Date(date + 'T' + time).getTime();
-  r.fired = false;
-  r.done = false;
-  save(); render();
-  closeEditModal();
-  showToast('התזכורת עודכנה!');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('editOverlay').addEventListener('click', function(e){
-    if(e.target===this) closeEditModal();
-  });
-  document.getElementById('overlay').addEventListener('click', function(e){
-    if(e.target===this) closeModal(false);
-  });
-});
-
+initDateTime();
+selRecurring(document.querySelector('.rec-chip[data-r="0"]'),0);
+renderAll();
 </script>
 </body>
 </html>
