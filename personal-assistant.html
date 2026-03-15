@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -5,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="׳”׳¢׳•׳–׳¨ ׳©׳׳™">
-<title>׳”׳¢׳•׳–׳¨ ׳”׳׳™׳©׳™</title>
+<meta name="apple-mobile-web-app-title" content="העוזר שלי">
+<title>העוזר האישי</title>
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -41,11 +42,11 @@ body {
   overflow-x: hidden;
 }
 
-/* ג”€ג”€ SCREENS ג”€ג”€ */
+/* ── SCREENS ── */
 .screen { display:none; flex-direction:column; min-height:100vh; padding-bottom:calc(80px + var(--safe-bot)); }
 .screen.active { display:flex; }
 
-/* ג”€ג”€ TOP BAR ג”€ג”€ */
+/* ── TOP BAR ── */
 .topbar {
   padding: calc(var(--safe-top) + 16px) 20px 16px;
   display:flex; align-items:center; justify-content:space-between;
@@ -61,7 +62,7 @@ body {
   font-size:1.1rem;cursor:pointer;border:none;color:var(--text);
 }
 
-/* ג”€ג”€ BOTTOM NAV ג”€ג”€ */
+/* ── BOTTOM NAV ── */
 .bottom-nav {
   position:fixed; bottom:0; left:0; right:0;
   padding: 10px 20px calc(10px + var(--safe-bot));
@@ -90,7 +91,7 @@ body {
 }
 .nav-icon-wrap { position:relative; }
 
-/* ג”€ג”€ HOME SCREEN ג”€ג”€ */
+/* ── HOME SCREEN ── */
 .morning-card {
   margin:0 16px 16px;
   background: linear-gradient(135deg, #1a1535, #0f1a2e);
@@ -143,7 +144,7 @@ body {
 .uc-msg { font-size:0.85rem;font-weight:700;line-height:1.3; }
 .uc-cat { font-size:0.65rem;color:var(--t3);margin-top:4px; }
 
-/* ג”€ג”€ TASK LIST ג”€ג”€ */
+/* ── TASK LIST ── */
 .tasks-scroll { padding:0 16px;display:flex;flex-direction:column;gap:8px; }
 
 .task-card {
@@ -203,7 +204,7 @@ body {
 .t-btn.wa:active{color:#25D366;}
 .t-btn.del:active{color:var(--red);}
 
-/* ג”€ג”€ ADD SCREEN ג”€ג”€ */
+/* ── ADD SCREEN ── */
 .add-screen { padding:0 16px; }
 .add-title { font-size:1.4rem;font-weight:900;padding:20px 20px 16px;text-align:center; }
 
@@ -314,7 +315,7 @@ body {
 }
 .rec-chip.sel{background:rgba(108,92,231,0.15);border-color:var(--acc);color:var(--acc2);}
 
-/* ג”€ג”€ HISTORY SCREEN ג”€ג”€ */
+/* ── HISTORY SCREEN ── */
 .history-item {
   background:var(--s1);border:1px solid var(--b1);
   border-radius:14px;padding:12px 14px;
@@ -326,7 +327,7 @@ body {
 .hi-msg{font-size:0.85rem;font-weight:600;text-decoration:line-through;color:var(--t2);}
 .hi-date{font-size:0.7rem;color:var(--t3);margin-top:2px;}
 
-/* ג”€ג”€ EDIT OVERLAY ג”€ג”€ */
+/* ── EDIT OVERLAY ── */
 .overlay{
   position:fixed;inset:0;background:rgba(0,0,0,0.8);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
@@ -421,37 +422,37 @@ body {
 <div class="screen active" id="screen-home">
   <div class="topbar">
     <div>
-      <div class="topbar-title" id="topGreeting">׳‘׳•׳§׳¨ ׳˜׳•׳‘ ג˜€ן¸</div>
-      <div class="topbar-sub" id="topDate">ג€”</div>
+      <div class="topbar-title" id="topGreeting">בוקר טוב ☀️</div>
+      <div class="topbar-sub" id="topDate">—</div>
     </div>
-    <button class="topbar-btn" onclick="reqNotif()">נ””</button>
+    <button class="topbar-btn" onclick="reqNotif()">🔔</button>
   </div>
 
   <div class="notif-strip" id="notifStrip" onclick="reqNotif()">
     <div class="notif-dot"></div>
-    <span id="notifText">׳׳—׳¥ ׳׳׳₪׳©׳¨ ׳”׳×׳¨׳׳•׳×</span>
-    <strong id="notifStatus">ג€”</strong>
+    <span id="notifText">לחץ לאפשר התראות</span>
+    <strong id="notifStatus">—</strong>
   </div>
 
   <div class="morning-card">
-    <div class="morning-greeting">׳¡׳™׳›׳•׳ ׳™׳•׳</div>
-    <div class="morning-date" id="todayLabel">ג€”</div>
+    <div class="morning-greeting">סיכום יום</div>
+    <div class="morning-date" id="todayLabel">—</div>
     <div class="morning-stats">
-      <div class="stat-pill"><div class="stat-num" id="statPending">0</div><div class="stat-label">׳׳׳×׳™׳ ׳•׳×</div></div>
-      <div class="stat-pill"><div class="stat-num" id="statToday">0</div><div class="stat-label">׳׳”׳™׳•׳</div></div>
-      <div class="stat-pill"><div class="stat-num" id="statDone">0</div><div class="stat-label">׳”׳•׳©׳׳׳•</div></div>
+      <div class="stat-pill"><div class="stat-num" id="statPending">0</div><div class="stat-label">ממתינות</div></div>
+      <div class="stat-pill"><div class="stat-num" id="statToday">0</div><div class="stat-label">להיום</div></div>
+      <div class="stat-pill"><div class="stat-num" id="statDone">0</div><div class="stat-label">הושלמו</div></div>
     </div>
   </div>
 
   <div class="section-title">
-    ׳“׳—׳•׳£ ׳¢׳›׳©׳™׳•
-    <span id="nextCountdown" style="color:var(--t2);font-variant-numeric:tabular-nums;font-size:0.8rem;letter-spacing:0;">ג€”</span>
+    דחוף עכשיו
+    <span id="nextCountdown" style="color:var(--t2);font-variant-numeric:tabular-nums;font-size:0.8rem;letter-spacing:0;">—</span>
   </div>
   <div class="urgent-strip" id="urgentStrip">
-    <div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">׳׳™׳ ׳×׳–׳›׳•׳¨׳•׳× ׳“׳—׳•׳₪׳•׳× נ‘</div>
+    <div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">אין תזכורות דחופות 👌</div>
   </div>
 
-  <div class="section-title">׳›׳ ׳”׳׳©׳™׳׳•׳× <span onclick="goScreen('screen-tasks')">׳”׳›׳ ג†’</span></div>
+  <div class="section-title">כל המשימות <span onclick="goScreen('screen-tasks')">הכל →</span></div>
   <div class="tasks-scroll" id="homeTasksList"></div>
 </div>
 
@@ -459,19 +460,19 @@ body {
 <div class="screen" id="screen-tasks">
   <div class="topbar">
     <div>
-      <div class="topbar-title">׳”׳׳©׳™׳׳•׳× ׳©׳׳™</div>
-      <div class="topbar-sub" id="taskCount">0 ׳₪׳¢׳™׳׳•׳×</div>
+      <div class="topbar-title">המשימות שלי</div>
+      <div class="topbar-sub" id="taskCount">0 פעילות</div>
     </div>
-    <button class="topbar-btn" onclick="clearDone()">נ§¹</button>
+    <button class="topbar-btn" onclick="clearDone()">🧹</button>
   </div>
 
   <!-- filter tabs -->
   <div style="display:flex;gap:8px;padding:0 16px;margin-bottom:14px;overflow-x:auto;" id="filterTabs">
-    <button class="chip sel" data-f="all" onclick="setFilter('all',this)">נ—‚ן¸ ׳”׳›׳</button>
-    <button class="chip" data-f="task" onclick="setFilter('task',this)">נ’¼ ׳׳©׳™׳׳•׳×</button>
-    <button class="chip" data-f="people" onclick="setFilter('people',this)">נ‘¥ ׳₪׳•׳׳• ׳׳₪</button>
-    <button class="chip" data-f="health" onclick="setFilter('health',this)">נ¥— ׳‘׳¨׳™׳׳•׳×</button>
-    <button class="chip" data-f="meeting" onclick="setFilter('meeting',this)">נ“… ׳₪׳’׳™׳©׳•׳×</button>
+    <button class="chip sel" data-f="all" onclick="setFilter('all',this)">🗂️ הכל</button>
+    <button class="chip" data-f="task" onclick="setFilter('task',this)">💼 משימות</button>
+    <button class="chip" data-f="people" onclick="setFilter('people',this)">👥 פולו אפ</button>
+    <button class="chip" data-f="health" onclick="setFilter('health',this)">🥗 בריאות</button>
+    <button class="chip" data-f="meeting" onclick="setFilter('meeting',this)">📅 פגישות</button>
   </div>
 
   <div class="tasks-scroll" id="allTasksList"></div>
@@ -480,93 +481,93 @@ body {
 <!-- ADD SCREEN -->
 <div class="screen" id="screen-add">
   <div class="topbar">
-    <div class="topbar-title">׳×׳–׳›׳•׳¨׳× ׳—׳“׳©׳” ג¨</div>
+    <div class="topbar-title">תזכורת חדשה ✨</div>
   </div>
   <div style="padding:0 16px;">
 
     <div class="input-card">
-      <div class="input-label">׳׳” ׳׳”׳–׳›׳™׳¨?</div>
-      <textarea class="nlp-area" id="nlpInput" placeholder="׳›׳×׳•׳‘ ׳‘׳—׳•׳₪׳©׳™׳•׳×... &#10;׳׳׳©׳: ׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳‘-16:30" rows="2"
+      <div class="input-label">מה להזכיר?</div>
+      <textarea class="nlp-area" id="nlpInput" placeholder="כתוב בחופשיות... &#10;למשל: לחזור לדני ב-16:30" rows="2"
         oninput="autoResize(this);liveparse(this.value)" onkeydown="handleKey(event)"></textarea>
 
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;" id="exampleChips">
-        <span class="chip" onclick="fillEx('׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳¢׳ ׳”׳¦׳¢׳× ׳”׳©׳•׳×׳₪׳•׳× ׳‘-16:30')">׳׳—׳–׳•׳¨ ׳׳“׳ ׳™ ׳‘-16:30</span>
-        <span class="chip" onclick="fillEx('׳”׳׳ ׳׳›׳׳×׳™ ׳¦׳”׳¨׳™׳™׳? ׳‘׳©׳¢׳” 13:00')">׳׳›׳׳×׳™ ׳¦׳”׳¨׳™׳™׳? 13:00</span>
-        <span class="chip" onclick="fillEx('׳₪׳’׳™׳©׳” ׳¢׳ ׳׳§׳•׳— ׳׳—׳¨ ׳‘-10:00')">׳₪׳’׳™׳©׳” ׳׳—׳¨ ׳‘-10</span>
-        <span class="chip" onclick="fillEx('׳׳©׳׳•׳— ׳“׳•׳— ׳›׳¡׳₪׳™ ׳‘-17:00')">׳“׳•׳— ׳›׳¡׳₪׳™ ׳‘-17:00</span>
+        <span class="chip" onclick="fillEx('לחזור לדני על הצעת השותפות ב-16:30')">לחזור לדני ב-16:30</span>
+        <span class="chip" onclick="fillEx('האם אכלתי צהריים? בשעה 13:00')">אכלתי צהריים? 13:00</span>
+        <span class="chip" onclick="fillEx('פגישה עם לקוח מחר ב-10:00')">פגישה מחר ב-10</span>
+        <span class="chip" onclick="fillEx('לשלוח דוח כספי ב-17:00')">דוח כספי ב-17:00</span>
       </div>
     </div>
 
     <div class="parse-box" id="parseBox">
-      <div class="parse-item"><span class="pl">נ“ ׳׳”:</span><span class="pv" id="ppMsg">ג€”</span></div>
-      <div class="parse-item"><span class="pl">נ“‚ ׳§׳˜׳’׳•׳¨׳™׳”:</span><span class="pv" id="ppCat">ג€”</span></div>
-      <div class="parse-item"><span class="pl">נ• ׳׳×׳™:</span><span class="pv" id="ppTime">ג€”</span></div>
+      <div class="parse-item"><span class="pl">📝 מה:</span><span class="pv" id="ppMsg">—</span></div>
+      <div class="parse-item"><span class="pl">📂 קטגוריה:</span><span class="pv" id="ppCat">—</span></div>
+      <div class="parse-item"><span class="pl">🕐 מתי:</span><span class="pv" id="ppTime">—</span></div>
     </div>
 
-    <!-- ׳׳™׳© ׳§׳©׳¨ -->
+    <!-- איש קשר -->
     <div class="input-card">
-      <div class="input-label">נ‘₪ ׳׳™׳© ׳§׳©׳¨ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)</div>
-      <input class="form-input" id="contactName" placeholder="׳©׳ ג€” ׳׳׳©׳: ׳“׳ ׳™, ׳׳™׳×׳™, ׳©׳¨׳”..." type="text">
+      <div class="input-label">👤 איש קשר (אופציונלי)</div>
+      <input class="form-input" id="contactName" placeholder="שם — למשל: דני, איתי, שרה..." type="text">
       <div style="margin-top:8px;">
-        <input class="form-input" id="contactPhone" placeholder="׳׳¡׳₪׳¨ ׳˜׳׳₪׳•׳ (׳׳₪׳×׳™׳—׳× WhatsApp)" type="tel">
+        <input class="form-input" id="contactPhone" placeholder="מספר טלפון (לפתיחת WhatsApp)" type="tel">
       </div>
     </div>
 
-    <!-- ׳×׳׳¨׳™׳ ׳•׳©׳¢׳” -->
+    <!-- תאריך ושעה -->
     <div class="input-card">
-      <div class="input-label">נ• ׳׳×׳™?</div>
+      <div class="input-label">🕐 מתי?</div>
       <div class="form-row">
         <div class="form-group">
-          <div style="font-size:0.72rem;color:var(--t3);">׳×׳׳¨׳™׳</div>
+          <div style="font-size:0.72rem;color:var(--t3);">תאריך</div>
           <input class="form-input" id="dateInput" type="date">
         </div>
         <div class="form-group">
-          <div style="font-size:0.72rem;color:var(--t3);">׳©׳¢׳”</div>
+          <div style="font-size:0.72rem;color:var(--t3);">שעה</div>
           <input class="form-input" id="timeInput" type="time">
         </div>
       </div>
 
-      <div style="font-size:0.72rem;color:var(--t3);margin-bottom:6px;">׳—׳•׳–׳¨ ׳¢׳ ׳¢׳¦׳׳•?</div>
+      <div style="font-size:0.72rem;color:var(--t3);margin-bottom:6px;">חוזר על עצמו?</div>
       <div class="recurring-opts" id="recurringOpts">
-        <span class="rec-chip" data-r="0" onclick="selRecurring(this,0)">׳₪׳¢׳ ׳׳—׳×</span>
-        <span class="rec-chip" data-r="60" onclick="selRecurring(this,60)">׳›׳ ׳©׳¢׳”</span>
-        <span class="rec-chip" data-r="1440" onclick="selRecurring(this,1440)">׳›׳ ׳™׳•׳</span>
-        <span class="rec-chip" data-r="10080" onclick="selRecurring(this,10080)">׳›׳ ׳©׳‘׳•׳¢</span>
-        <span class="rec-chip" data-r="custom-3" onclick="selRecurring(this,'custom-3')">׳›׳ 3 ׳׳—׳•׳“׳©</span>
-        <span class="rec-chip" data-r="custom-4" onclick="selRecurring(this,'custom-4')">׳›׳ 4 ׳׳—׳•׳“׳©</span>
+        <span class="rec-chip" data-r="0" onclick="selRecurring(this,0)">פעם אחת</span>
+        <span class="rec-chip" data-r="60" onclick="selRecurring(this,60)">כל שעה</span>
+        <span class="rec-chip" data-r="1440" onclick="selRecurring(this,1440)">כל יום</span>
+        <span class="rec-chip" data-r="10080" onclick="selRecurring(this,10080)">כל שבוע</span>
+        <span class="rec-chip" data-r="custom-3" onclick="selRecurring(this,'custom-3')">כל 3 לחודש</span>
+        <span class="rec-chip" data-r="custom-4" onclick="selRecurring(this,'custom-4')">כל 4 לחודש</span>
       </div>
     </div>
 
-    <!-- ׳§׳˜׳’׳•׳¨׳™׳” + ׳¢׳“׳™׳₪׳•׳× -->
+    <!-- קטגוריה + עדיפות -->
     <div class="input-card">
-      <div class="input-label" style="margin-bottom:10px;">נ“‚ ׳§׳˜׳’׳•׳¨׳™׳”</div>
+      <div class="input-label" style="margin-bottom:10px;">📂 קטגוריה</div>
       <select class="form-select" id="catSelect" style="margin-bottom:12px;">
-        <option value="task">נ’¼ ׳׳©׳™׳׳” / ׳¢׳‘׳•׳“׳”</option>
-        <option value="people">נ‘¥ ׳₪׳•׳׳• ׳׳₪ / ׳׳—׳–׳•׳¨ ׳׳׳ ׳©׳™׳</option>
-        <option value="health">נ¥— ׳‘׳¨׳™׳׳•׳× / ׳׳›׳™׳׳”</option>
-        <option value="meeting">נ“… ׳₪׳’׳™׳©׳” / ׳׳™׳¨׳•׳¢</option>
-        <option value="finance">נ’° ׳›׳¡׳₪׳™׳ / ׳“׳™׳•׳•׳—</option>
-        <option value="other">נ“ ׳׳—׳¨</option>
+        <option value="task">💼 משימה / עבודה</option>
+        <option value="people">👥 פולו אפ / לחזור לאנשים</option>
+        <option value="health">🥗 בריאות / אכילה</option>
+        <option value="meeting">📅 פגישה / אירוע</option>
+        <option value="finance">💰 כספים / דיווח</option>
+        <option value="other">📌 אחר</option>
       </select>
 
-      <div class="input-label" style="margin-bottom:8px;">ג¡ ׳¢׳“׳™׳₪׳•׳×</div>
+      <div class="input-label" style="margin-bottom:8px;">⚡ עדיפות</div>
       <div class="pri-row" id="priRow">
-        <button class="pri-btn" data-p="urgent" onclick="selPri(this,'urgent')">נ”´ ׳“׳—׳•׳£</button>
-        <button class="pri-btn sel-normal" data-p="normal" onclick="selPri(this,'normal')">נ”µ ׳¨׳’׳™׳</button>
-        <button class="pri-btn" data-p="low" onclick="selPri(this,'low')">ג× ׳ ׳׳•׳</button>
+        <button class="pri-btn" data-p="urgent" onclick="selPri(this,'urgent')">🔴 דחוף</button>
+        <button class="pri-btn sel-normal" data-p="normal" onclick="selPri(this,'normal')">🔵 רגיל</button>
+        <button class="pri-btn" data-p="low" onclick="selPri(this,'low')">⚪ נמוך</button>
       </div>
     </div>
 
-    <!-- ׳₪׳•׳׳• ׳׳₪ -->
+    <!-- פולו אפ -->
     <div class="followup-row">
       <div>
-        <div class="fr-text">נ”„ ׳₪׳•׳׳• ׳׳₪ ׳׳•׳˜׳•׳׳˜׳™</div>
-        <div class="fr-sub">׳×׳–׳›׳™׳¨ ׳׳™ ׳©׳•׳‘ ׳׳ ׳׳ ׳¡׳™׳׳ ׳×׳™ ׳›׳‘׳•׳¦׳¢</div>
+        <div class="fr-text">🔄 פולו אפ אוטומטי</div>
+        <div class="fr-sub">תזכיר לי שוב אם לא סימנתי כבוצע</div>
       </div>
       <button class="toggle" id="followupToggle" onclick="this.classList.toggle('on')"></button>
     </div>
 
-    <button class="btn-add" onclick="addFromForm()">ג“ ׳©׳׳•׳¨ ׳×׳–׳›׳•׳¨׳×</button>
+    <button class="btn-add" onclick="addFromForm()">✓ שמור תזכורת</button>
   </div>
 </div>
 
@@ -574,10 +575,10 @@ body {
 <div class="screen" id="screen-history">
   <div class="topbar">
     <div>
-      <div class="topbar-title">׳”׳™׳¡׳˜׳•׳¨׳™׳”</div>
-      <div class="topbar-sub">׳׳” ׳”׳•׳©׳׳</div>
+      <div class="topbar-title">היסטוריה</div>
+      <div class="topbar-sub">מה הושלם</div>
     </div>
-    <button class="topbar-btn" onclick="clearHistory()">נ—‘ן¸</button>
+    <button class="topbar-btn" onclick="clearHistory()">🗑️</button>
   </div>
   <div style="padding:0 16px;" id="historyList"></div>
 </div>
@@ -585,42 +586,42 @@ body {
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
   <button class="nav-item active" id="nav-home" onclick="goScreen('screen-home')">
-    <div class="nav-icon-wrap"><span class="nav-icon">נ </span></div>
-    <span class="nav-label">׳‘׳™׳×</span>
+    <div class="nav-icon-wrap"><span class="nav-icon">🏠</span></div>
+    <span class="nav-label">בית</span>
   </button>
   <button class="nav-item" id="nav-tasks" onclick="goScreen('screen-tasks')">
     <div class="nav-icon-wrap">
-      <span class="nav-icon">נ“‹</span>
+      <span class="nav-icon">📋</span>
       <span class="nav-badge" id="taskBadge" style="display:none">0</span>
     </div>
-    <span class="nav-label">׳׳©׳™׳׳•׳×</span>
+    <span class="nav-label">משימות</span>
   </button>
   <button class="nav-item" id="nav-add" onclick="goScreen('screen-add')">
     <div class="nav-icon-wrap" style="background:linear-gradient(135deg,var(--acc),#4834d4);border-radius:14px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;">
-      <span class="nav-icon" style="font-size:1.5rem;">ן¼‹</span>
+      <span class="nav-icon" style="font-size:1.5rem;">＋</span>
     </div>
-    <span class="nav-label">׳”׳•׳¡׳£</span>
+    <span class="nav-label">הוסף</span>
   </button>
   <button class="nav-item" id="nav-history" onclick="goScreen('screen-history')">
-    <div class="nav-icon-wrap"><span class="nav-icon">נ“</span></div>
-    <span class="nav-label">׳”׳™׳¡׳˜׳•׳¨׳™׳”</span>
+    <div class="nav-icon-wrap"><span class="nav-icon">📊</span></div>
+    <span class="nav-label">היסטוריה</span>
   </button>
 </div>
 
 <!-- ALERT MODAL -->
 <div class="alert-overlay" id="alertOverlay">
   <div class="alert-box">
-    <span class="alert-emoji" id="alertEmoji">ג°</span>
-    <div class="alert-title" id="alertTitle">׳”׳’׳™׳¢ ׳”׳–׳׳!</div>
-    <div class="alert-msg" id="alertMsg">ג€”</div>
+    <span class="alert-emoji" id="alertEmoji">⏰</span>
+    <div class="alert-title" id="alertTitle">הגיע הזמן!</div>
+    <div class="alert-msg" id="alertMsg">—</div>
     <div class="snooze-row">
-      <button class="snooze-btn" onclick="snooze(5)">׳“׳—׳” 5 ׳“׳§'</button>
-      <button class="snooze-btn" onclick="snooze(15)">׳“׳—׳” 15 ׳“׳§'</button>
-      <button class="snooze-btn" onclick="snooze(60)">׳“׳—׳” ׳©׳¢׳”</button>
+      <button class="snooze-btn" onclick="snooze(5)">דחה 5 דק'</button>
+      <button class="snooze-btn" onclick="snooze(15)">דחה 15 דק'</button>
+      <button class="snooze-btn" onclick="snooze(60)">דחה שעה</button>
     </div>
     <div class="alert-btns">
-      <button class="btn-done-alert" onclick="dismissAlert(true)">ג“ ׳‘׳•׳¦׳¢</button>
-      <button class="btn-wa-alert" id="alertWABtn" onclick="alertOpenWA()">נ’¬ WhatsApp</button>
+      <button class="btn-done-alert" onclick="dismissAlert(true)">✓ בוצע</button>
+      <button class="btn-wa-alert" id="alertWABtn" onclick="alertOpenWA()">💬 WhatsApp</button>
     </div>
   </div>
 </div>
@@ -629,52 +630,52 @@ body {
 <div class="overlay" id="editOverlay" onclick="if(event.target===this)closeEdit()">
   <div class="bottom-sheet">
     <div class="sheet-handle"></div>
-    <div class="sheet-title">גן¸ ׳¢׳¨׳™׳›׳× ׳×׳–׳›׳•׳¨׳×</div>
+    <div class="sheet-title">✏️ עריכת תזכורת</div>
     <div class="form-group" style="margin-bottom:12px;">
-      <div class="input-label">׳׳”</div>
+      <div class="input-label">מה</div>
       <input class="form-input" id="eMsg" type="text">
     </div>
     <div class="form-group" style="margin-bottom:12px;">
-      <div class="input-label">׳׳™׳© ׳§׳©׳¨</div>
-      <input class="form-input" id="eContact" type="text" placeholder="׳©׳ (׳׳•׳₪׳¦׳™׳•׳ ׳׳™)">
+      <div class="input-label">איש קשר</div>
+      <input class="form-input" id="eContact" type="text" placeholder="שם (אופציונלי)">
     </div>
     <div class="form-group" style="margin-bottom:12px;">
-      <div class="input-label">׳˜׳׳₪׳•׳</div>
-      <input class="form-input" id="ePhone" type="tel" placeholder="׳׳¡׳₪׳¨ WhatsApp">
+      <div class="input-label">טלפון</div>
+      <input class="form-input" id="ePhone" type="tel" placeholder="מספר WhatsApp">
     </div>
     <div class="form-row" style="margin-bottom:12px;">
-      <div class="form-group"><div class="input-label">׳×׳׳¨׳™׳</div><input class="form-input" id="eDate" type="date"></div>
-      <div class="form-group"><div class="input-label">׳©׳¢׳”</div><input class="form-input" id="eTime" type="time"></div>
+      <div class="form-group"><div class="input-label">תאריך</div><input class="form-input" id="eDate" type="date"></div>
+      <div class="form-group"><div class="input-label">שעה</div><input class="form-input" id="eTime" type="time"></div>
     </div>
     <div class="form-group" style="margin-bottom:12px;">
-      <div class="input-label">׳§׳˜׳’׳•׳¨׳™׳”</div>
+      <div class="input-label">קטגוריה</div>
       <select class="form-select" id="eCat">
-        <option value="task">נ’¼ ׳׳©׳™׳׳”</option>
-        <option value="people">נ‘¥ ׳₪׳•׳׳• ׳׳₪</option>
-        <option value="health">נ¥— ׳‘׳¨׳™׳׳•׳×</option>
-        <option value="meeting">נ“… ׳₪׳’׳™׳©׳”</option>
-        <option value="finance">נ’° ׳›׳¡׳₪׳™׳</option>
-        <option value="other">נ“ ׳׳—׳¨</option>
+        <option value="task">💼 משימה</option>
+        <option value="people">👥 פולו אפ</option>
+        <option value="health">🥗 בריאות</option>
+        <option value="meeting">📅 פגישה</option>
+        <option value="finance">💰 כספים</option>
+        <option value="other">📌 אחר</option>
       </select>
     </div>
     <div class="form-group" style="margin-bottom:16px;">
-      <div class="input-label">׳¢׳“׳™׳₪׳•׳×</div>
+      <div class="input-label">עדיפות</div>
       <div class="pri-row" id="ePriRow">
-        <button class="pri-btn" data-p="urgent" onclick="eSelPri(this,'urgent')">נ”´ ׳“׳—׳•׳£</button>
-        <button class="pri-btn" data-p="normal" onclick="eSelPri(this,'normal')">נ”µ ׳¨׳’׳™׳</button>
-        <button class="pri-btn" data-p="low" onclick="eSelPri(this,'low')">ג× ׳ ׳׳•׳</button>
+        <button class="pri-btn" data-p="urgent" onclick="eSelPri(this,'urgent')">🔴 דחוף</button>
+        <button class="pri-btn" data-p="normal" onclick="eSelPri(this,'normal')">🔵 רגיל</button>
+        <button class="pri-btn" data-p="low" onclick="eSelPri(this,'low')">⚪ נמוך</button>
       </div>
     </div>
-    <button class="btn-add" onclick="saveEdit()">נ’¾ ׳©׳׳•׳¨ ׳©׳™׳ ׳•׳™׳™׳</button>
+    <button class="btn-add" onclick="saveEdit()">💾 שמור שינויים</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // DATA
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 let reminders = JSON.parse(localStorage.getItem('pa_v3') || '[]');
 let history = JSON.parse(localStorage.getItem('pa_v3_hist') || '[]');
 let currentFilter = 'all';
@@ -685,12 +686,12 @@ let selectedPri = 'normal';
 let ePri = 'normal';
 
 const CATS = {
-  task:    {icon:'נ’¼',label:'׳׳©׳™׳׳”'},
-  people:  {icon:'נ‘¥',label:'׳₪׳•׳׳• ׳׳₪'},
-  health:  {icon:'נ¥—',label:'׳‘׳¨׳™׳׳•׳×'},
-  meeting: {icon:'נ“…',label:'׳₪׳’׳™׳©׳”'},
-  finance: {icon:'נ’°',label:'׳›׳¡׳₪׳™׳'},
-  other:   {icon:'נ“',label:'׳׳—׳¨'},
+  task:    {icon:'💼',label:'משימה'},
+  people:  {icon:'👥',label:'פולו אפ'},
+  health:  {icon:'🥗',label:'בריאות'},
+  meeting: {icon:'📅',label:'פגישה'},
+  finance: {icon:'💰',label:'כספים'},
+  other:   {icon:'📌',label:'אחר'},
 };
 
 function save() {
@@ -698,9 +699,9 @@ function save() {
   localStorage.setItem('pa_v3_hist', JSON.stringify(history));
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // NAVIGATION
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function goScreen(id) {
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -713,15 +714,15 @@ function goScreen(id) {
   window.scrollTo(0,0);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // PARSE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function parseInput(txt) {
   if(!txt.trim()) return null;
   const now = new Date();
   let fireAt = null, msg = txt;
 
-  const timeRx = /\b(?:׳‘-?|׳‘׳©׳¢׳”\s*)(\d{1,2}):(\d{2})\b/;
+  const timeRx = /\b(?:ב-?|בשעה\s*)(\d{1,2}):(\d{2})\b/;
   const m = txt.match(timeRx);
   if(m){
     const d=new Date(); d.setHours(+m[1],+m[2],0,0);
@@ -729,34 +730,34 @@ function parseInput(txt) {
     fireAt=d.getTime();
     msg=txt.replace(timeRx,'').replace(/\s{2,}/g,' ').trim();
   }
-  const tmS = txt.match(/\b(?:׳‘-?|׳‘׳©׳¢׳”\s*)(\d{1,2})\b/);
+  const tmS = txt.match(/\b(?:ב-?|בשעה\s*)(\d{1,2})\b/);
   if(!fireAt&&tmS){
     const d=new Date(); d.setHours(+tmS[1],0,0,0);
     if(d<=now) d.setDate(d.getDate()+1);
     fireAt=d.getTime();
     msg=txt.replace(tmS[0],'').replace(/\s{2,}/g,' ').trim();
   }
-  if(txt.includes('׳׳—׳¨')&&!fireAt){
+  if(txt.includes('מחר')&&!fireAt){
     const d=new Date(); d.setDate(d.getDate()+1); d.setHours(9,0,0,0);
     fireAt=d.getTime();
-    msg=msg.replace('׳׳—׳¨','').replace(/\s{2,}/g,' ').trim();
+    msg=msg.replace('מחר','').replace(/\s{2,}/g,' ').trim();
   }
   if(!fireAt) fireAt=Date.now()+10*60*1000;
 
-  msg=msg.replace(/^(׳×׳–׳›׳™׳¨ ׳׳™ ׳?|׳×׳–׳›׳™׳¨ ׳׳™|׳׳”׳–׳›׳™׳¨ ׳׳™|׳׳—׳–׳•׳¨ ׳?|׳”׳׳|׳¦׳¨׳™׳ ׳?)/i,'').trim();
+  msg=msg.replace(/^(תזכיר לי ל?|תזכיר לי|להזכיר לי|לחזור ל?|האם|צריך ל?)/i,'').trim();
   if(!msg) msg=txt;
 
   let cat='other';
   const l=txt;
-  if(/׳׳—׳–׳•׳¨|׳׳”׳©׳™׳‘|׳׳¢׳ ׳•׳×|׳׳₪׳ ׳•׳×|׳׳”׳×׳§׳©׳¨|׳׳›׳×׳•׳‘ ׳|׳׳“׳‘׳¨ ׳¢׳|׳׳¢׳“׳›׳|׳₪׳•׳׳•/.test(l)) cat='people';
-  else if(/׳׳׳›׳•׳|׳׳©׳×׳•׳×|׳¦׳”׳¨׳™׳™׳|׳׳¨׳•׳—׳”|׳׳™׳|׳•׳™׳˜׳׳™׳|׳×׳¨׳•׳₪׳”|׳‘׳¨׳™׳׳•׳×|׳¡׳₪׳•׳¨׳˜|׳׳™׳©׳•׳|׳׳”׳×׳׳׳/.test(l)) cat='health';
-  else if(/׳₪׳’׳™׳©׳”|׳™׳©׳™׳‘׳”|׳¨׳׳™׳•׳|׳©׳™׳—׳” ׳¢׳|zoom|teams|׳§׳₪׳” ׳¢׳/.test(l)) cat='meeting';
-  else if(/׳׳©׳›׳•׳¨׳×|׳“׳™׳•׳•׳—|׳—׳©׳‘׳•׳ ׳™׳×|׳×׳©׳׳•׳|׳׳©׳׳|׳׳—׳×׳•׳|׳׳”׳’׳™׳©|׳׳¡/.test(l)) cat='finance';
-  else if(/׳׳©׳׳•׳—|׳׳¡׳™׳™׳|׳׳›׳×׳•׳‘|׳׳‘׳ ׳•׳×|׳׳”׳›׳™׳|׳׳‘׳“׳•׳§|׳׳׳©׳¨/.test(l)) cat='task';
+  if(/לחזור|להשיב|לענות|לפנות|להתקשר|לכתוב ל|לדבר עם|לעדכן|פולו/.test(l)) cat='people';
+  else if(/לאכול|לשתות|צהריים|ארוחה|מים|ויטמין|תרופה|בריאות|ספורט|לישון|להתאמן/.test(l)) cat='health';
+  else if(/פגישה|ישיבה|ראיון|שיחה עם|zoom|teams|קפה עם/.test(l)) cat='meeting';
+  else if(/משכורת|דיווח|חשבונית|תשלום|לשלם|לחתום|להגיש|מס/.test(l)) cat='finance';
+  else if(/לשלוח|לסיים|לכתוב|לבנות|להכין|לבדוק|לאשר/.test(l)) cat='task';
 
   // extract contact name
   let contact = '';
-  const contactRx = /׳([׳-׳×]{2,10})\s+(?:׳¢׳|׳‘׳ ׳•׳’׳¢|׳‘-|׳‘׳©׳¢׳”|$)/;
+  const contactRx = /ל([א-ת]{2,10})\s+(?:על|בנוגע|ב-|בשעה|$)/;
   const cm = txt.match(contactRx);
   if(cm) contact = cm[1];
 
@@ -794,9 +795,9 @@ function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();addFro
 
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // ADD
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function selRecurring(el, val) {
   document.querySelectorAll('.rec-chip').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');
@@ -824,7 +825,7 @@ function addFromForm() {
   const cat = document.getElementById('catSelect').value;
   const followup = document.getElementById('followupToggle').classList.contains('on');
 
-  if(!txt) {showToast('גן¸ ׳›׳×׳•׳‘ ׳׳” ׳׳”׳–׳›׳™׳¨');return;}
+  if(!txt) {showToast('✍️ כתוב מה להזכיר');return;}
 
   let fireAt;
   if(date&&time) {
@@ -839,7 +840,7 @@ function addFromForm() {
 
   const r = {
     id: Date.now(),
-    msg: txt.replace(/^(׳×׳–׳›׳™׳¨ ׳׳™ ׳?|׳×׳–׳›׳™׳¨ ׳׳™)/i,'').trim() || txt,
+    msg: txt.replace(/^(תזכיר לי ל?|תזכיר לי)/i,'').trim() || txt,
     cat, priority: selectedPri,
     fireAt, fired:false, done:false,
     contact: contact||'',
@@ -864,15 +865,15 @@ function addFromForm() {
   selRecurring(document.querySelector('.rec-chip[data-r="0"]'),0);
   initDateTime();
 
-  showToast('ג… ׳×׳–׳›׳•׳¨׳× ׳ ׳©׳׳¨׳”!');
+  showToast('✅ תזכורת נשמרה!');
   goScreen('screen-home');
 
   if(Notification.permission==='default') reqNotif();
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // EDIT
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function openEdit(id) {
   const r=reminders.find(x=>x.id===id); if(!r) return;
   editingId=id;
@@ -902,12 +903,12 @@ function saveEdit() {
   const time=document.getElementById('eTime').value;
   if(date&&time){r.fireAt=new Date(date+'T'+time).getTime();r.fired=false;r.done=false;}
   save(); renderAll(); closeEdit();
-  showToast('ג… ׳¢׳•׳“׳›׳!');
+  showToast('✅ עודכן!');
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // DONE / DELETE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function markDone(id) {
   const r=reminders.find(x=>x.id===id); if(!r) return;
   r.done=!r.done;
@@ -921,23 +922,23 @@ function markDone(id) {
 function deleteReminder(id) {
   reminders=reminders.filter(x=>x.id!==id);
   save(); renderAll();
-  showToast('נ—‘ן¸ ׳ ׳׳—׳§׳”');
+  showToast('🗑️ נמחקה');
 }
 
 function clearDone() {
   reminders=reminders.filter(x=>!x.done&&!x.fired);
   save(); renderAll();
-  showToast('ג¨ ׳ ׳™׳§׳•׳™ ׳”׳•׳©׳׳');
+  showToast('✨ ניקוי הושלם');
 }
 
 function clearHistory() {
   history=[];save();renderHistory();
-  showToast('נ—‘ן¸ ׳”׳™׳¡׳˜׳•׳¨׳™׳” ׳ ׳•׳§׳×׳”');
+  showToast('🗑️ היסטוריה נוקתה');
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // WA
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function openWA(id) {
   const r=reminders.find(x=>x.id===id); if(!r) return;
   const phone=r.phone?(r.phone.startsWith('0')?'972'+r.phone.slice(1):r.phone):'';
@@ -945,9 +946,9 @@ function openWA(id) {
   window.open(phone?`https://wa.me/${phone}?text=${txt}`:`https://wa.me/?text=${txt}`,'_blank');
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // FIRE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function checkFire() {
   const now=Date.now();
   reminders.forEach(r=>{
@@ -965,8 +966,8 @@ function checkFire() {
 function fireAlert(r, isFollowup=false) {
   firingId=r.id;
   const cat=CATS[r.cat]||CATS.other;
-  document.getElementById('alertEmoji').textContent=isFollowup?'נ”„':cat.icon;
-  document.getElementById('alertTitle').textContent=isFollowup?'׳₪׳•׳׳• ׳׳₪ ג€” ׳¢׳“׳™׳™׳ ׳׳ ׳‘׳•׳¦׳¢':'׳”׳’׳™׳¢ ׳”׳–׳׳!';
+  document.getElementById('alertEmoji').textContent=isFollowup?'🔄':cat.icon;
+  document.getElementById('alertTitle').textContent=isFollowup?'פולו אפ — עדיין לא בוצע':'הגיע הזמן!';
   let msg=r.msg;
   if(r.contact) msg+=` (${r.contact})`;
   document.getElementById('alertMsg').textContent=msg;
@@ -986,7 +987,7 @@ function fireAlert(r, isFollowup=false) {
   } catch(e){}
 
   if(Notification.permission==='granted') {
-    new Notification(cat.icon+' '+( isFollowup?'׳₪׳•׳׳• ׳׳₪':'׳×׳–׳›׳•׳¨׳×'), {body:msg});
+    new Notification(cat.icon+' '+( isFollowup?'פולו אפ':'תזכורת'), {body:msg});
   }
 
   r.fired=true;
@@ -1010,7 +1011,7 @@ function snooze(mins) {
   r.fireAt=Date.now()+mins*60*1000; r.fired=false;
   save(); renderAll();
   dismissAlert(false);
-  showToast(`ג° ׳ ׳“׳—׳” ׳‘-${mins} ׳“׳§׳•׳×`);
+  showToast(`⏰ נדחה ב-${mins} דקות`);
 }
 
 function alertOpenWA() {
@@ -1027,9 +1028,9 @@ function dismissAlert(markDone) {
   firingId=null;
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // RENDER
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function renderAll(){renderHome();renderTasks();renderHistory();updateBadge();}
 
 function renderHome() {
@@ -1045,7 +1046,7 @@ function renderHome() {
   // urgent strip
   const urgent=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt).slice(0,5);
   const us=document.getElementById('urgentStrip');
-  if(!urgent.length){us.innerHTML='<div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">׳׳™׳ ׳×׳–׳›׳•׳¨׳•׳× ׳§׳¨׳•׳‘׳•׳× נ‘</div>';}
+  if(!urgent.length){us.innerHTML='<div style="padding:10px 4px;color:var(--t3);font-size:0.82rem;">אין תזכורות קרובות 👌</div>';}
   else {
     us.innerHTML=urgent.map(r=>{
       const diff=r.fireAt-now;
@@ -1053,7 +1054,7 @@ function renderHome() {
       return `<div class="urgent-chip ${cls}" onclick="openEdit(${r.id})">
         <div class="uc-time">${fmtDT(new Date(r.fireAt))}</div>
         <div class="uc-msg">${escH(r.msg)}</div>
-        <div class="uc-cat">${CATS[r.cat]?.icon||'נ“'} ${r.contact?'ֲ· '+r.contact:''}</div>
+        <div class="uc-cat">${CATS[r.cat]?.icon||'📌'} ${r.contact?'· '+r.contact:''}</div>
       </div>`;
     }).join('');
   }
@@ -1062,7 +1063,7 @@ function renderHome() {
   const next=reminders.filter(r=>!r.done).sort((a,b)=>a.fireAt-b.fireAt).slice(0,5);
   document.getElementById('homeTasksList').innerHTML=next.length
     ? next.map(r=>taskCardHTML(r)).join('')
-    : '<div class="empty-state"><div class="ei">נ</div><p>׳׳™׳ ׳׳©׳™׳׳•׳× ׳₪׳¢׳™׳׳•׳×<br>׳׳—׳¥ + ׳׳”׳•׳¡׳™׳£</p></div>';
+    : '<div class="empty-state"><div class="ei">🌟</div><p>אין משימות פעילות<br>לחץ + להוסיף</p></div>';
 }
 
 function renderTasks() {
@@ -1075,8 +1076,8 @@ function renderTasks() {
     return a.fireAt-b.fireAt;
   });
   const active=reminders.filter(r=>!r.done&&!r.fired);
-  document.getElementById('taskCount').textContent=active.length+' ׳₪׳¢׳™׳׳•׳×';
-  list.innerHTML=shown.length?shown.map(r=>taskCardHTML(r)).join(''):'<div class="empty-state"><div class="ei">ג¨</div><p>׳׳™׳ ׳׳©׳™׳׳•׳× ׳›׳׳</p></div>';
+  document.getElementById('taskCount').textContent=active.length+' פעילות';
+  list.innerHTML=shown.length?shown.map(r=>taskCardHTML(r)).join(''):'<div class="empty-state"><div class="ei">✨</div><p>אין משימות כאן</p></div>';
 }
 
 function taskCardHTML(r) {
@@ -1084,37 +1085,37 @@ function taskCardHTML(r) {
   const d=new Date(r.fireAt);
   const diff=r.fireAt-now;
   let tCls='future',tTxt=fmtDT(d);
-  if(r.done){tCls='done-tag';tTxt='׳”׳•׳©׳׳ ג“';}
-  else if(r.fired){tCls='done-tag';tTxt='׳¢׳‘׳¨';}
-  else if(diff<0){tCls='soon';tTxt='׳¢׳‘׳¨ '+fmtT(d);}
-  else if(diff<3600000){tCls='soon';tTxt='׳‘׳§׳¨׳•׳‘ '+fmtT(d);}
-  else if(isSameDay(d,new Date())){tCls='today';tTxt='׳”׳™׳•׳ '+fmtT(d);}
+  if(r.done){tCls='done-tag';tTxt='הושלם ✓';}
+  else if(r.fired){tCls='done-tag';tTxt='עבר';}
+  else if(diff<0){tCls='soon';tTxt='עבר '+fmtT(d);}
+  else if(diff<3600000){tCls='soon';tTxt='בקרוב '+fmtT(d);}
+  else if(isSameDay(d,new Date())){tCls='today';tTxt='היום '+fmtT(d);}
 
   const cat=CATS[r.cat]||CATS.other;
   const priCls=r.priority==='urgent'?'urgent':r.cat==='people'?'followup':'';
 
   return `<div class="task-card ${r.done?'done':''} ${priCls}" id="tc-${r.id}">
-    <button class="task-check ${r.done?'checked':''}" onclick="markDone(${r.id})">${r.done?'ג“':''}</button>
+    <button class="task-check ${r.done?'checked':''}" onclick="markDone(${r.id})">${r.done?'✓':''}</button>
     <div class="task-body">
       <div class="task-msg">${escH(r.msg)}</div>
       <div class="task-meta">
         <div class="pri-dot" style="background:${r.priority==='urgent'?'var(--red)':r.priority==='low'?'var(--t3)':'var(--acc2)'}"></div>
         <span class="time-tag ${tCls}">${tTxt}</span>
-        ${r.contact?`<span class="contact-tag">נ‘₪ ${escH(r.contact)}</span>`:''}
+        ${r.contact?`<span class="contact-tag">👤 ${escH(r.contact)}</span>`:''}
         <span style="font-size:0.68rem;color:var(--t3);">${cat.icon}</span>
       </div>
     </div>
     <div class="task-right">
-      ${r.phone||r.contact?`<button class="t-btn wa" onclick="openWA(${r.id})">נ’¬</button>`:''}
-      <button class="t-btn" onclick="openEdit(${r.id})">גן¸</button>
-      <button class="t-btn del" onclick="deleteReminder(${r.id})">נ—‘ן¸</button>
+      ${r.phone||r.contact?`<button class="t-btn wa" onclick="openWA(${r.id})">💬</button>`:''}
+      <button class="t-btn" onclick="openEdit(${r.id})">✏️</button>
+      <button class="t-btn del" onclick="deleteReminder(${r.id})">🗑️</button>
     </div>
   </div>`;
 }
 
 function renderHistory() {
   const list=document.getElementById('historyList');
-  if(!history.length){list.innerHTML='<div class="empty-state"><div class="ei">נ“­</div><p>׳׳™׳ ׳”׳™׳¡׳˜׳•׳¨׳™׳” ׳¢׳“׳™׳™׳</p></div>';return;}
+  if(!history.length){list.innerHTML='<div class="empty-state"><div class="ei">📭</div><p>אין היסטוריה עדיין</p></div>';return;}
   list.innerHTML=history.slice(0,50).map(h=>{
     const cat=CATS[h.cat]||CATS.other;
     return `<div class="history-item">
@@ -1141,9 +1142,9 @@ function setFilter(f,el) {
   renderTasks();
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // TICKER
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 setInterval(()=>{
   checkFire();
   // countdown
@@ -1151,12 +1152,12 @@ setInterval(()=>{
   const next=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt)[0];
   const el=document.getElementById('nextCountdown');
   if(next){const d=next.fireAt-now;el.textContent=d<3600000?fmtMs(d):fmtDT(new Date(next.fireAt));}
-  else el.textContent='׳׳™׳ ׳׳׳×׳™׳ ׳•׳×';
+  else el.textContent='אין ממתינות';
 },1000);
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // NOTIFICATIONS
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function reqNotif(){
   if(!('Notification' in window)) return;
   if(Notification.permission==='granted'){updateNotifUI();return;}
@@ -1165,22 +1166,22 @@ function reqNotif(){
 function updateNotifUI(){
   const p=('Notification' in window)?Notification.permission:'no';
   document.getElementById('notifText').textContent=
-    p==='granted'?'׳”׳×׳¨׳׳•׳× ׳₪׳¢׳™׳׳•׳× ג€” ׳×׳§׳‘׳ ׳ ׳™׳•׳“ ׳’׳ ׳‘׳¨׳§׳¢':
-    p==='denied'?'׳”׳×׳¨׳׳•׳× ׳—׳¡׳•׳׳•׳×':
-    '׳׳—׳¥ ׳׳׳₪׳©׳¨ ׳”׳×׳¨׳׳•׳×';
-  document.getElementById('notifStatus').textContent=p==='granted'?'ג“ ׳₪׳¢׳™׳':p==='denied'?'ג—':'׳׳—׳¥';
+    p==='granted'?'התראות פעילות — תקבל ניוד גם ברקע':
+    p==='denied'?'התראות חסומות':
+    'לחץ לאפשר התראות';
+  document.getElementById('notifStatus').textContent=p==='granted'?'✓ פעיל':p==='denied'?'✗':'לחץ';
   if(p==='granted') document.getElementById('notifStrip').style.opacity='0.5';
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // UTILS
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 function fmtT(d){return d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}
 function fmtDT(d){
   const today=new Date();
-  if(isSameDay(d,today)) return '׳”׳™׳•׳ '+fmtT(d);
+  if(isSameDay(d,today)) return 'היום '+fmtT(d);
   const tom=new Date(today);tom.setDate(tom.getDate()+1);
-  if(isSameDay(d,tom)) return '׳׳—׳¨ '+fmtT(d);
+  if(isSameDay(d,tom)) return 'מחר '+fmtT(d);
   return d.toLocaleDateString('he-IL',{day:'numeric',month:'numeric'})+' '+fmtT(d);
 }
 function isSameDay(a,b){return a.toDateString()===b.toDateString();}
@@ -1199,16 +1200,16 @@ function initDateTime(){
 
 function updateTopbar(){
   const h=new Date().getHours();
-  const g=h<12?'׳‘׳•׳§׳¨ ׳˜׳•׳‘ ג˜€ן¸':h<17?'׳¦׳”׳¨׳™׳™׳ ׳˜׳•׳‘׳™׳ נ₪':h<21?'׳¢׳¨׳‘ ׳˜׳•׳‘ נ†':'׳׳™׳׳” ׳˜׳•׳‘ נ™';
+  const g=h<12?'בוקר טוב ☀️':h<17?'צהריים טובים 🌤':h<21?'ערב טוב 🌆':'לילה טוב 🌙';
   document.getElementById('topGreeting').textContent=g;
   const d=new Date();
   document.getElementById('topDate').textContent=d.toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'});
   document.getElementById('todayLabel').textContent=d.toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 // INIT
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════
 updateTopbar();
 updateNotifUI();
 initDateTime();
