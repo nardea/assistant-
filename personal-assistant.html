@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>העוזר האישי שלי</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&family=Noto+Sans+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #0d0d0f;
+  --surface: #17171b;
+  --surface2: #1f1f26;
+  --surface3: #26262f;
+  --border: #2a2a35;
+  --border2: #33333f;
+  --text: #f0f0f5;
+  --text2: #9090a8;
+  --text3: #5a5a70;
+  --accent: #7c6af7;
+  --accent2: #a897ff;
+  --green: #3ddc84;
+  --orange: #ff9f45;
+  --red: #ff5f5f;
+  --blue: #5ab4ff;
+  --pink: #ff6eb4;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* BG effects */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background: 
+    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(124,106,247,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 80% 90%, rgba(61,220,132,0.05) 0%, transparent 55%);
+  pointer-events:none;z-index:0;
+}
+
+.container {
+  width:100%;max-width:600px;
+  padding: 0 1rem 6rem;
+  position:relative;z-index:1;
+}
+
+/* Header */
+header {
+  padding: 2.5rem 0 1.5rem;
+  text-align:center;
+  animation: fadeDown 0.7s ease both;
+}
+.avatar {
+  width:60px;height:60px;
+  background: linear-gradient(135deg, var(--accent), #5040c8);
+  border-radius:20px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:28px;margin-bottom:1rem;
+  box-shadow: 0 8px 32px rgba(124,106,247,0.35);
+}
+header h1 {
+  font-size:1.7rem;font-weight:900;
+  background: linear-gradient(135deg, var(--text) 30%, var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+header p { color:var(--text2); font-size:0.88rem; margin-top:0.3rem; }
+
+/* Notif bar */
+.notif-bar {
+  background: rgba(124,106,247,0.08);
+  border: 1px solid rgba(124,106,247,0.18);
+  border-radius:12px;
+  padding:0.6rem 1rem;
+  font-size:0.8rem;
+  color:var(--text2);
+  display:flex;align-items:center;gap:0.6rem;
+  cursor:pointer;
+  margin-bottom:1.2rem;
+  transition: border-color 0.2s;
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+.notif-bar:hover { border-color: var(--accent); }
+.notif-dot { width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2s infinite; }
+.notif-bar span { flex:1; }
+.notif-status { font-weight:700;color:var(--accent2); }
+
+/* Chat input area */
+.chat-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius:20px;
+  padding:1.2rem;
+  margin-bottom:1.2rem;
+  animation: fadeUp 0.5s ease 0.15s both;
+}
+.chat-hint {
+  font-size:0.78rem;color:var(--text3);margin-bottom:0.7rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.examples {
+  display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.9rem;
+}
+.example-chip {
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:20px;
+  padding:0.3rem 0.75rem;
+  font-size:0.75rem;color:var(--text2);
+  cursor:pointer;transition:all 0.15s;
+  font-family:'Heebo',sans-serif;
+}
+.example-chip:hover { border-color:var(--accent);color:var(--accent2);background:rgba(124,106,247,0.08); }
+
+.input-row {
+  display:flex;gap:0.6rem;align-items:flex-end;
+}
+.nlp-input {
+  flex:1;
+  background:var(--surface2);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  color:var(--text);
+  font-family:'Heebo',sans-serif;
+  font-size:1rem;
+  padding:0.75rem 1rem;
+  resize:none;
+  outline:none;
+  min-height:48px;max-height:120px;
+  direction:rtl;
+  line-height:1.4;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.nlp-input::placeholder{color:var(--text3)}
+.nlp-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(124,106,247,0.12); }
+
+.send-btn {
+  width:48px;height:48px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),#5040c8);
+  border:none;border-radius:14px;
+  color:white;font-size:1.2rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+  box-shadow:0 4px 16px rgba(124,106,247,0.3);
+}
+.send-btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,106,247,0.4); }
+.send-btn:active { transform:translateY(0); }
+
+/* Parse preview */
+.parse-preview {
+  background: rgba(61,220,132,0.06);
+  border: 1px solid rgba(61,220,132,0.2);
+  border-radius:12px;
+  padding:0.8rem 1rem;
+  margin-top:0.8rem;
+  font-size:0.85rem;
+  display:none;
+  animation:fadeUp 0.3s ease both;
+}
+.parse-preview.show { display:block; }
+.parse-row { display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem; }
+.parse-row:last-child{margin-bottom:0}
+.parse-label { color:var(--text3);font-size:0.75rem;min-width:60px; }
+.parse-val { color:var(--green);font-weight:600; }
+.parse-actions { display:flex;gap:0.5rem;margin-top:0.8rem; }
+.btn-confirm {
+  background:linear-gradient(135deg,var(--green),#2ab868);
+  color:#000;font-family:'Heebo',sans-serif;font-weight:700;
+  border:none;border-radius:10px;padding:0.5rem 1.2rem;font-size:0.85rem;
+  cursor:pointer;transition:all 0.15s;flex:1;
+}
+.btn-confirm:hover { transform:translateY(-1px); }
+.btn-cancel-parse {
+  background:var(--surface3);border:1px solid var(--border2);
+  color:var(--text2);font-family:'Heebo',sans-serif;
+  border-radius:10px;padding:0.5rem 0.8rem;font-size:0.85rem;
+  cursor:pointer;transition:all 0.15s;
+}
+.btn-cancel-parse:hover { color:var(--text);border-color:var(--border); }
+
+/* Tabs */
+.tabs {
+  display:flex;gap:0.5rem;margin-bottom:1rem;
+  animation: fadeUp 0.5s ease 0.2s both;
+  overflow-x:auto;padding-bottom:2px;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab {
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:0.45rem 0.9rem;
+  font-family:'Heebo',sans-serif;font-size:0.8rem;font-weight:600;
+  color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;gap:0.4rem;
+  white-space:nowrap;transition:all 0.15s;
+  position:relative;
+}
+.tab.active { background:var(--accent);border-color:var(--accent);color:white; box-shadow:0 4px 12px rgba(124,106,247,0.3); }
+.tab:not(.active):hover { border-color:var(--border2);color:var(--text); }
+.tab-count {
+  background:rgba(255,255,255,0.15);
+  border-radius:10px;padding:1px 6px;font-size:0.7rem;
+}
+.tab.active .tab-count { background:rgba(255,255,255,0.25); }
+
+/* Reminder cards */
+.section-header {
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:0.8rem;
+}
+.section-label { font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase; }
+.clear-done {
+  background:none;border:none;color:var(--text3);font-family:'Heebo',sans-serif;
+  font-size:0.75rem;cursor:pointer;padding:2px 6px;border-radius:6px;
+  transition:color 0.15s;
+}
+.clear-done:hover{color:var(--red)}
+
+.reminders-grid { display:flex;flex-direction:column;gap:0.7rem; }
+
+.reminder-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1rem 1.1rem;
+  display:flex;align-items:center;gap:0.9rem;
+  position:relative;
+  animation:fadeUp 0.3s ease both;
+  transition:border-color 0.2s, opacity 0.3s;
+  cursor:default;
+}
+.reminder-card:hover { border-color:var(--border2); }
+.reminder-card.done { opacity:0.42; }
+.reminder-card.firing {
+  border-color:var(--accent);
+  box-shadow: 0 0 0 3px rgba(124,106,247,0.15);
+  animation:cardPulse 0.8s ease 3;
+}
+
+@keyframes cardPulse {
+  0%,100%{box-shadow:0 0 0 3px rgba(124,106,247,0.15)}
+  50%{box-shadow:0 0 0 6px rgba(124,106,247,0.25)}
+}
+
+.cat-icon {
+  width:40px;height:40px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.cat-task    { background:rgba(90,180,255,0.12); }
+.cat-people  { background:rgba(255,110,180,0.12); }
+.cat-health  { background:rgba(61,220,132,0.12); }
+.cat-meeting { background:rgba(255,159,69,0.12); }
+.cat-other   { background:rgba(124,106,247,0.12); }
+
+.card-body { flex:1;min-width:0; }
+.card-msg {
+  font-size:0.95rem;font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.reminder-card.done .card-msg { text-decoration:line-through;color:var(--text2); }
+.card-meta {
+  display:flex;align-items:center;gap:0.6rem;margin-top:0.25rem;
+}
+.time-pill {
+  font-size:0.72rem;font-weight:700;
+  padding:2px 8px;border-radius:20px;
+  display:inline-flex;align-items:center;gap:3px;
+}
+.time-pill.soon { background:rgba(255,95,95,0.15);color:var(--red); }
+.time-pill.today { background:rgba(255,159,69,0.15);color:var(--orange); }
+.time-pill.future { background:rgba(124,106,247,0.12);color:var(--accent2); }
+.time-pill.done-pill { background:rgba(61,220,132,0.1);color:var(--green); }
+.cat-label { font-size:0.7rem;color:var(--text3); }
+
+.countdown-tiny {
+  font-size:0.68rem;color:var(--text3);
+  font-variant-numeric:tabular-nums;
+}
+
+.card-actions { display:flex;gap:0.3rem;flex-shrink:0; }
+.icon-btn {
+  background:none;border:none;cursor:pointer;
+  padding:6px;border-radius:8px;font-size:0.95rem;
+  color:var(--text3);transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;
+}
+.icon-btn:hover { background:var(--surface2);color:var(--text); }
+.icon-btn.wa:hover { background:rgba(37,211,102,0.12);color:#25D366; }
+.icon-btn.done-btn:hover { background:rgba(61,220,132,0.1);color:var(--green); }
+.icon-btn.del:hover { background:rgba(255,95,95,0.1);color:var(--red); }
+
+/* Countdown bar at top */
+.next-banner {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:0.75rem 1rem;
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:0.8rem;
+  animation:fadeUp 0.5s ease 0.25s both;
+}
+.next-banner.hidden{display:none}
+.pulse-ring {
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  background:rgba(124,106,247,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;position:relative;
+}
+.pulse-ring::after {
+  content:'';position:absolute;inset:-4px;
+  border-radius:50%;border:2px solid rgba(124,106,247,0.3);
+  animation:ringPulse 2s infinite;
+}
+@keyframes ringPulse{0%{transform:scale(1);opacity:0.6}100%{transform:scale(1.4);opacity:0}}
+.next-label { font-size:0.72rem;color:var(--text3); }
+.next-title { font-size:0.92rem;font-weight:700; }
+.next-time { font-size:1.1rem;font-weight:900;color:var(--accent2);font-variant-numeric:tabular-nums;margin-right:auto; }
+
+/* Empty */
+.empty { text-align:center;padding:3rem 1rem;color:var(--text3); }
+.empty-icon{font-size:3rem;margin-bottom:0.5rem;opacity:0.4}
+.empty p{font-size:0.9rem}
+
+/* Modal */
+.overlay {
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.overlay.open{opacity:1;pointer-events:all}
+.modal {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  padding:2rem 1.8rem;
+  max-width:360px;width:90%;
+  text-align:center;
+  transform:scale(0.88) translateY(20px);
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.overlay.open .modal { transform:scale(1) translateY(0); }
+.modal-emoji{font-size:3.5rem;margin-bottom:0.8rem;display:block}
+.modal h2{font-size:1.3rem;font-weight:900;margin-bottom:0.5rem}
+.modal p{color:var(--text2);font-size:0.9rem;line-height:1.5;margin-bottom:1.5rem}
+.modal-btns{display:flex;gap:0.7rem}
+.modal-btns .btn{flex:1}
+.btn{
+  border:none;border-radius:12px;cursor:pointer;
+  font-family:'Heebo',sans-serif;font-weight:700;font-size:0.9rem;
+  padding:0.75rem 1rem;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;
+}
+.btn-accent{background:linear-gradient(135deg,var(--accent),#5040c8);color:white;box-shadow:0 4px 16px rgba(124,106,247,0.3)}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(124,106,247,0.4)}
+.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);color:white;box-shadow:0 4px 16px rgba(37,211,102,0.25)}
+.btn-wa:hover{transform:translateY(-2px)}
+.btn-ghost{background:var(--surface2);border:1px solid var(--border2);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+
+/* Snooze options */
+.snooze-opts{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;margin-bottom:1rem}
+.snooze-chip{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:20px;padding:0.3rem 0.8rem;
+  font-family:'Heebo',sans-serif;font-size:0.78rem;color:var(--text2);
+  cursor:pointer;transition:all 0.15s;
+}
+.snooze-chip:hover{border-color:var(--accent);color:var(--accent2)}
+
+/* Edit modal */
+.edit-modal {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  padding:1.8rem;
+  max-width:400px;width:94%;
+  transform:scale(0.88) translateY(20px);
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.overlay.open .edit-modal { transform:scale(1) translateY(0); }
+.edit-modal h2 { font-size:1.1rem;font-weight:900;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem; }
+.edit-field { display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem; }
+.edit-label { font-size:0.75rem;color:var(--text3);font-weight:600;letter-spacing:0.06em;text-transform:uppercase; }
+.edit-input, .edit-select {
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:12px;color:var(--text);
+  font-family:'Heebo',sans-serif;font-size:0.95rem;
+  padding:0.65rem 0.9rem;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  direction:rtl;width:100%;
+}
+.edit-input:focus,.edit-select:focus { border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,247,0.12); }
+.edit-select option { background:var(--surface2);color:var(--text); }
+.edit-row { display:flex;gap:0.7rem; }
+.edit-row .edit-field { flex:1; }
+.edit-btns { display:flex;gap:0.7rem;margin-top:1.2rem; }
+.edit-btns .btn { flex:1; }
+
+/* Toast */
+.toast {
+  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:14px;padding:0.7rem 1.3rem;
+  font-size:0.85rem;font-weight:600;color:var(--text);
+  box-shadow:0 8px 32px rgba(0,0,0,0.45);
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  z-index:300;white-space:nowrap;display:flex;align-items:center;gap:0.5rem;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="avatar">🧠</div>
+  <h1>העוזר האישי שלי</h1>
+  <p>כתוב בחופשיות — אני מבין הכל</p>
+</header>
+
+<div class="notif-bar" onclick="reqNotif()">
+  <div class="notif-dot"></div>
+  <span id="notifText">לחץ כדי לאפשר התראות ברקע</span>
+  <span class="notif-status" id="notifStatus">—</span>
+</div>
+
+<!-- Next reminder banner -->
+<div class="next-banner hidden" id="nextBanner">
+  <div class="pulse-ring" id="nextIcon">⏰</div>
+  <div style="flex:1;min-width:0">
+    <div class="next-label">התזכורת הבאה</div>
+    <div class="next-title" id="nextTitle">—</div>
+  </div>
+  <div class="next-time" id="nextTime">—</div>
+</div>
+
+<!-- Input -->
+<div class="chat-box">
+  <div class="chat-hint">💡 כתוב בשפה רגילה, לדוגמה:</div>
+  <div class="examples" id="examples">
+    <span class="example-chip" onclick="fillExample(this)">תזכיר לי לשלוח הצעת מחיר לאיתי ב-14:00</span>
+    <span class="example-chip" onclick="fillExample(this)">לחזור לדני על הצעת השותפות בשעה 16:30</span>
+    <span class="example-chip" onclick="fillExample(this)">האם אכלתי צהריים? בשעה 13:00</span>
+    <span class="example-chip" onclick="fillExample(this)">תזכיר לי לשתות מים כל שעה</span>
+    <span class="example-chip" onclick="fillExample(this)">פגישה עם מנהל כספים מחר ב-10:00</span>
+  </div>
+  <div class="input-row">
+    <textarea class="nlp-input" id="nlpInput" placeholder="תזכיר לי ל..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this);liveparse(this.value)"></textarea>
+    <button class="send-btn" onclick="handleSend()">➤</button>
+  </div>
+  <div class="parse-preview" id="parsePreview">
+    <div class="parse-row"><span class="parse-label">📝 מה:</span> <span class="parse-val" id="ppMsg">—</span></div>
+    <div class="parse-row"><span class="parse-label">📂 קטגוריה:</span> <span class="parse-val" id="ppCat">—</span></div>
+    <div class="parse-row"><span class="parse-label">🕐 מתי:</span> <span class="parse-val" id="ppTime">—</span></div>
+    <div class="parse-actions">
+      <button class="btn-confirm" onclick="confirmAdd()">✓ שמור תזכורת</button>
+      <button class="btn-cancel-parse" onclick="cancelParse()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs" id="tabs">
+  <div class="tab active" data-filter="all" onclick="setFilter('all')">🗂️ הכל <span class="tab-count" id="cnt-all">0</span></div>
+  <div class="tab" data-filter="task" onclick="setFilter('task')">💼 משימות <span class="tab-count" id="cnt-task">0</span></div>
+  <div class="tab" data-filter="people" onclick="setFilter('people')">👥 אנשים <span class="tab-count" id="cnt-people">0</span></div>
+  <div class="tab" data-filter="health" onclick="setFilter('health')">🥗 בריאות <span class="tab-count" id="cnt-health">0</span></div>
+  <div class="tab" data-filter="meeting" onclick="setFilter('meeting')">📅 פגישות <span class="tab-count" id="cnt-meeting">0</span></div>
+</div>
+
+<div class="section-header">
+  <span class="section-label" id="sectionLabel">כל התזכורות</span>
+  <button class="clear-done" onclick="clearDone()">נקה הושלמו</button>
+</div>
+
+<div class="reminders-grid" id="remindersGrid"></div>
+
+</div><!-- /container -->
+
+<!-- Firing modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <span class="modal-emoji" id="mEmoji">⏰</span>
+    <h2 id="mTitle">הגיע הזמן!</h2>
+    <p id="mMsg">—</p>
+    <div class="snooze-opts">
+      <span class="snooze-chip" onclick="snooze(5)">דחה 5 דק'</span>
+      <span class="snooze-chip" onclick="snooze(15)">דחה 15 דק'</span>
+      <span class="snooze-chip" onclick="snooze(60)">דחה שעה</span>
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="closeModal(true)">✓ בוצע</button>
+      <button class="btn btn-wa" id="waBtn" onclick="openWA()">📲 WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit modal -->
+<div class="overlay" id="editOverlay">
+  <div class="edit-modal">
+    <h2>✏️ עריכת תזכורת</h2>
+    <div class="edit-field">
+      <span class="edit-label">מה להזכיר</span>
+      <input class="edit-input" id="editMsg" type="text" placeholder="תוכן התזכורת">
+    </div>
+    <div class="edit-field">
+      <span class="edit-label">קטגוריה</span>
+      <select class="edit-select" id="editCat">
+        <option value="task">💼 משימה</option>
+        <option value="people">👥 לחזור לאנשים</option>
+        <option value="health">🥗 בריאות / אכילה</option>
+        <option value="meeting">📅 פגישה</option>
+        <option value="other">📌 אחר</option>
+      </select>
+    </div>
+    <div class="edit-row">
+      <div class="edit-field">
+        <span class="edit-label">תאריך</span>
+        <input class="edit-input" id="editDate" type="date">
+      </div>
+      <div class="edit-field">
+        <span class="edit-label">שעה</span>
+        <input class="edit-input" id="editTime" type="time">
+      </div>
+    </div>
+    <div class="edit-btns">
+      <button class="btn btn-ghost" onclick="closeEditModal()">ביטול</button>
+      <button class="btn btn-accent" onclick="saveEdit()">💾 שמור</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit modal -->
+<div class="overlay" id="editOverlay">
+  <div class="edit-modal">
+    <h2>✏️ עריכת תזכורת</h2>
+    <div class="edit-field">
+      <span class="edit-label">מה להזכיר</span>
+      <input class="edit-input" id="editMsg" type="text" placeholder="תוכן התזכורת">
+    </div>
+    <div class="edit-field">
+      <span class="edit-label">קטגוריה</span>
+      <select class="edit-select" id="editCat">
+        <option value="task">💼 משימה</option>
+        <option value="people">👥 לחזור לאנשים</option>
+        <option value="health">🥗 בריאות / אכילה</option>
+        <option value="meeting">📅 פגישה</option>
+        <option value="other">📌 אחר</option>
+      </select>
+    </div>
+    <div class="edit-row">
+      <div class="edit-field">
+        <span class="edit-label">תאריך</span>
+        <input class="edit-input" id="editDate" type="date">
+      </div>
+      <div class="edit-field">
+        <span class="edit-label">שעה</span>
+        <input class="edit-input" id="editTime" type="time">
+      </div>
+    </div>
+    <div class="edit-btns">
+      <button class="btn btn-ghost" onclick="closeEditModal()">ביטול</button>
+      <button class="btn btn-accent" onclick="saveEdit()">💾 שמור</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+let reminders = JSON.parse(localStorage.getItem('pa_reminders_v2') || '[]');
+let filter = 'all';
+let pendingParsed = null;
+let firingId = null;
+
+const CATS = {
+  task:    { label:'משימה',  icon:'💼', cls:'cat-task' },
+  people:  { label:'אנשים',  icon:'👥', cls:'cat-people' },
+  health:  { label:'בריאות', icon:'🥗', cls:'cat-health' },
+  meeting: { label:'פגישה',  icon:'📅', cls:'cat-meeting' },
+  other:   { label:'אחר',   icon:'📌', cls:'cat-other' },
+};
+
+function save() { localStorage.setItem('pa_reminders_v2', JSON.stringify(reminders)); }
+
+// ============================================================
+// PARSING
+// ============================================================
+function parseInput(txt) {
+  if (!txt.trim()) return null;
+  const now = new Date();
+  let fireAt = null;
+  let msg = txt;
+
+  // time patterns: "ב-14:00" "בשעה 14:00" "ב14:00" "14:00"
+  const timeRx = /\b(?:ב-?|בשעה\s*)(\d{1,2}):(\d{2})\b/;
+  const m = txt.match(timeRx);
+  if (m) {
+    const d = new Date();
+    d.setHours(+m[1], +m[2], 0, 0);
+    if (d <= now) d.setDate(d.getDate()+1);
+    fireAt = d.getTime();
+    msg = txt.replace(timeRx,'').replace(/\s{2,}/g,' ').trim();
+  }
+
+  // "מחר ב-10" pattern without minutes
+  const tmShort = txt.match(/\b(?:ב-?|בשעה\s*)(\d{1,2})\b/);
+  if (!fireAt && tmShort) {
+    const d = new Date();
+    d.setHours(+tmShort[1], 0, 0, 0);
+    if (d <= now) d.setDate(d.getDate()+1);
+    fireAt = d.getTime();
+    msg = txt.replace(tmShort[0],'').replace(/\s{2,}/g,' ').trim();
+  }
+
+  // "מחר" without time => tomorrow 9am
+  if (txt.includes('מחר') && !fireAt) {
+    const d = new Date(); d.setDate(d.getDate()+1); d.setHours(9,0,0,0);
+    fireAt = d.getTime();
+    msg = msg.replace('מחר','').replace(/\s{2,}/g,' ').trim();
+  }
+
+  // "כל שעה" recurring
+  let recurring = null;
+  if (txt.includes('כל שעה')) { recurring = 60; if(!fireAt){const d=new Date();d.setHours(d.getHours()+1,0,0,0);fireAt=d.getTime();} }
+  if (txt.includes('כל חצי שעה')||txt.includes('כל 30 דקות')) { recurring=30; }
+
+  // Default: 10 minutes from now
+  if (!fireAt) { fireAt = Date.now() + 10*60*1000; }
+
+  // Strip common prefixes
+  msg = msg.replace(/^(תזכיר לי ל?|תזכיר לי|להזכיר לי ל?|לזכור ל?|לחזור ל?|האם|צריך ל?)/i,'').trim();
+  if (!msg) msg = txt.replace(timeRx,'').trim();
+
+  // Categorize
+  let cat = 'other';
+  const low = txt.toLowerCase();
+  if (/לחזור|להשיב|לענות|לפנות|לשלוח הצ|להתקשר|לקרוא ל|לכתוב ל|לדבר עם|לעדכן/.test(low)) cat='people';
+  else if (/לאכול|לשתות|לאכל|צהריים|ארוחה|מים|ויטמין|תרופה|תרופות|בריאות|ספורט|לישון|לנוח|להתאמן/.test(low)) cat='health';
+  else if (/פגישה|ישיבה|ראיון|שיחה עם|meeting|zoom|teams|קפה עם/.test(low)) cat='meeting';
+  else if (/לשלוח|לסיים|לכתוב|לצלם|לבנות|לעדכן|להכין|לסקור|לבדוק|להגיש|לאשר|לשלם|לחתום/.test(low)) cat='task';
+
+  return { msg, cat, fireAt, recurring };
+}
+
+let parseDebounce;
+function liveparse(val) {
+  clearTimeout(parseDebounce);
+  if (!val.trim()) { hideParse(); return; }
+  parseDebounce = setTimeout(() => {
+    const p = parseInput(val);
+    if (!p) { hideParse(); return; }
+    pendingParsed = p;
+    document.getElementById('ppMsg').textContent = p.msg || val;
+    document.getElementById('ppCat').textContent = CATS[p.cat].icon + ' ' + CATS[p.cat].label;
+    const d = new Date(p.fireAt);
+    document.getElementById('ppTime').textContent = formatDateTime(d);
+    document.getElementById('parsePreview').classList.add('show');
+  }, 400);
+}
+
+function hideParse() {
+  document.getElementById('parsePreview').classList.remove('show');
+  pendingParsed = null;
+}
+
+function confirmAdd() {
+  if (!pendingParsed) return;
+  addReminder(pendingParsed);
+  document.getElementById('nlpInput').value = '';
+  hideParse();
+}
+
+function cancelParse() {
+  hideParse();
+  document.getElementById('nlpInput').focus();
+}
+
+function handleSend() {
+  const val = document.getElementById('nlpInput').value.trim();
+  if (!val) return;
+  if (pendingParsed) { confirmAdd(); return; }
+  const p = parseInput(val);
+  if (p) {
+    pendingParsed = p;
+    confirmAdd();
+  }
+}
+
+function handleKey(e) {
+  if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); handleSend(); }
+}
+
+function autoResize(el) {
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,120)+'px';
+}
+
+function fillExample(el) {
+  document.getElementById('nlpInput').value = el.textContent;
+  autoResize(document.getElementById('nlpInput'));
+  liveparse(el.textContent);
+  document.getElementById('nlpInput').focus();
+}
+
+// ============================================================
+// REMINDERS CRUD
+// ============================================================
+function addReminder(parsed) {
+  const r = {
+    id: Date.now(),
+    msg: parsed.msg,
+    cat: parsed.cat,
+    fireAt: parsed.fireAt,
+    recurring: parsed.recurring || null,
+    fired: false,
+    done: false,
+  };
+  reminders.push(r);
+  reminders.sort((a,b)=>a.fireAt-b.fireAt);
+  save();
+  render();
+  showToast('✅ תזכורת נשמרה — ' + formatTime(new Date(r.fireAt)));
+  if (Notification.permission==='default') reqNotif();
+}
+
+function markDone(id) {
+  const r = reminders.find(x=>x.id===id);
+  if (r) { r.done=!r.done; save(); render(); }
+}
+
+function deleteReminder(id) {
+  reminders = reminders.filter(x=>x.id!==id);
+  save(); render();
+  showToast('🗑️ נמחקה');
+}
+
+function clearDone() {
+  reminders = reminders.filter(x=>!x.done&&!x.fired);
+  save(); render();
+  showToast('✨ ניקוי הושלם');
+}
+
+function snooze(mins) {
+  const r = reminders.find(x=>x.id===firingId);
+  if (r) { r.fireAt=Date.now()+mins*60*1000; r.fired=false; save(); render(); }
+  closeModal(false);
+  showToast(`⏰ נדחה ב-${mins} דקות`);
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function setFilter(f) {
+  filter=f;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
+  const labels={all:'כל התזכורות',task:'משימות',people:'לחזור לאנשים',health:'בריאות ואכילה',meeting:'פגישות'};
+  document.getElementById('sectionLabel').textContent=labels[f]||'תזכורות';
+  render();
+}
+
+function render() {
+  const grid = document.getElementById('remindersGrid');
+  const now = Date.now();
+  
+  // update counts
+  const cats=['task','people','health','meeting'];
+  const active=reminders.filter(r=>!r.done&&!r.fired);
+  document.getElementById('cnt-all').textContent=active.length;
+  cats.forEach(c=>document.getElementById('cnt-'+c).textContent=active.filter(r=>r.cat===c).length);
+
+  // next banner
+  const pending=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt);
+  const nb=document.getElementById('nextBanner');
+  if(pending.length){
+    nb.classList.remove('hidden');
+    const nx=pending[0];
+    document.getElementById('nextIcon').textContent=CATS[nx.cat].icon;
+    document.getElementById('nextTitle').textContent=nx.msg;
+  } else {
+    nb.classList.add('hidden');
+  }
+
+  // filter
+  let shown=reminders;
+  if(filter!=='all') shown=reminders.filter(r=>r.cat===filter);
+  shown=[...shown].sort((a,b)=>{
+    if(a.done!==b.done) return a.done?1:-1;
+    return a.fireAt-b.fireAt;
+  });
+
+  if(!shown.length){
+    grid.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><p>אין תזכורות כאן<br>הוסף אחת למעלה</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = shown.map(r=>{
+    const cat=CATS[r.cat];
+    const d=new Date(r.fireAt);
+    const diff=r.fireAt-now;
+    let pillCls='future',pillTxt=formatDateTime(d);
+    if(r.done){pillCls='done-pill';pillTxt='הושלם ✓';}
+    else if(r.fired){pillCls='done-pill';pillTxt='נשלח ✓';}
+    else if(diff<0){pillCls='soon';pillTxt='עבר '+formatTime(d);}
+    else if(diff<3600000){pillCls='soon';pillTxt='בקרוב — '+formatTime(d);}
+    else if(isSameDay(d,new Date())){pillCls='today';pillTxt='היום '+formatTime(d);}
+
+    const countdown = (!r.done&&!r.fired&&diff>0&&diff<3600000)
+      ? `<span class="countdown-tiny" id="cd-${r.id}">${fmtMs(diff)}</span>` : '';
+
+    return `<div class="reminder-card ${r.done?'done':''}" id="rc-${r.id}">
+      <div class="cat-icon ${cat.cls}">${cat.icon}</div>
+      <div class="card-body">
+        <div class="card-msg">${escHtml(r.msg)}</div>
+        <div class="card-meta">
+          <span class="time-pill ${pillCls}">${pillTxt}</span>
+          <span class="cat-label">${cat.label}</span>
+          ${countdown}
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="icon-btn" title="ערוך" onclick="openEdit(${r.id})">✏️</button>
+        <button class="icon-btn wa" title="שלח ב-WhatsApp" onclick="sendWADirect(${r.id})">💬</button>
+        <button class="icon-btn done-btn" title="סמן כבוצע" onclick="markDone(${r.id})">${r.done?'↩️':'✓'}</button>
+        <button class="icon-btn del" title="מחק" onclick="deleteReminder(${r.id})">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function sendWADirect(id) {
+  const r=reminders.find(x=>x.id===id);
+  if(!r)return;
+  const text=encodeURIComponent(r.msg);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
+}
+
+// ============================================================
+// FIRING
+// ============================================================
+function checkFire() {
+  const now=Date.now();
+  reminders.forEach(r=>{
+    if(!r.done&&!r.fired&&r.fireAt<=now&&!document.getElementById('overlay').classList.contains('open')) {
+      fire(r);
+    }
+  });
+}
+
+function fire(r) {
+  firingId=r.id;
+  const cat=CATS[r.cat];
+  document.getElementById('mEmoji').textContent=cat.icon;
+  document.getElementById('mTitle').textContent='הגיע הזמן!';
+  document.getElementById('mMsg').textContent=r.msg;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('rc-'+r.id)?.classList.add('firing');
+
+  // sound
+  try {
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    [0,150,300].forEach(delay=>{
+      const osc=ctx.createOscillator();const g=ctx.createGain();
+      osc.connect(g);g.connect(ctx.destination);
+      osc.frequency.value=880;osc.type='sine';
+      g.gain.setValueAtTime(0.3,ctx.currentTime+delay/1000);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.4);
+      osc.start(ctx.currentTime+delay/1000);osc.stop(ctx.currentTime+delay/1000+0.5);
+    });
+  } catch(e){}
+
+  // browser notif
+  if(Notification.permission==='granted'){
+    new Notification(`${cat.icon} תזכורת`, {body:r.msg});
+  }
+
+  // mark fired (but snooze can reset)
+  r.fired=true;
+  if(r.recurring){r.fireAt=Date.now()+r.recurring*60*1000;r.fired=false;}
+  save(); render();
+}
+
+function openWA() {
+  const r=reminders.find(x=>x.id===firingId);
+  if(!r)return;
+  window.open(`https://wa.me/?text=${encodeURIComponent(r.msg)}`,'_blank');
+  closeModal(true);
+}
+
+function closeModal(markDoneFlag) {
+  document.getElementById('overlay').classList.remove('open');
+  if(markDoneFlag&&firingId){
+    const r=reminders.find(x=>x.id===firingId);
+    if(r){r.done=true;save();render();}
+  }
+  document.querySelectorAll('.reminder-card.firing').forEach(el=>el.classList.remove('firing'));
+  firingId=null;
+}
+
+// ============================================================
+// TICKER
+// ============================================================
+setInterval(()=>{
+  checkFire();
+  // update countdowns
+  const now=Date.now();
+  reminders.forEach(r=>{
+    if(!r.done&&!r.fired){
+      const diff=r.fireAt-now;
+      const el=document.getElementById('cd-'+r.id);
+      if(el){
+        if(diff>0&&diff<3600000) el.textContent=fmtMs(diff);
+        else if(diff<=0) render();
+      }
+    }
+  });
+  // next banner countdown
+  const pending=reminders.filter(r=>!r.done&&!r.fired&&r.fireAt>now).sort((a,b)=>a.fireAt-b.fireAt);
+  if(pending.length){
+    const diff=pending[0].fireAt-now;
+    document.getElementById('nextTime').textContent=diff<3600000?fmtMs(diff):formatDateTime(new Date(pending[0].fireAt));
+  }
+},1000);
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+function reqNotif() {
+  if(!('Notification' in window))return;
+  if(Notification.permission==='granted'){updateNotifUI();return;}
+  Notification.requestPermission().then(()=>updateNotifUI());
+}
+function updateNotifUI(){
+  const p=('Notification' in window)?Notification.permission:'unsupported';
+  const el=document.getElementById('notifText');
+  const st=document.getElementById('notifStatus');
+  if(p==='granted'){el.textContent='התראות מופעלות — תקבל ניוד גם ברקע';st.textContent='✓ פעיל';}
+  else if(p==='denied'){el.textContent='התראות חסומות — לחץ לאפשר דרך הדפדפן';st.textContent='✗ חסום';}
+  else{el.textContent='לחץ לאפשר התראות ברקע';st.textContent='לחץ';}
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function formatTime(d){return d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}
+function formatDateTime(d){
+  const today=new Date();const tm=formatTime(d);
+  if(isSameDay(d,today)) return 'היום '+tm;
+  const tom=new Date(today);tom.setDate(tom.getDate()+1);
+  if(isSameDay(d,tom)) return 'מחר '+tm;
+  return d.toLocaleDateString('he-IL',{day:'numeric',month:'numeric'})+' '+tm;
+}
+function isSameDay(a,b){return a.toDateString()===b.toDateString();}
+function fmtMs(ms){const m=Math.floor(ms/60000);const s=Math.floor((ms%60000)/1000);return`${m}:${String(s).padStart(2,'0')}`;}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+updateNotifUI();
+render();
+
+// ============================================================
+// EDIT
+// ============================================================
+let editingId = null;
+
+function openEdit(id) {
+  const r = reminders.find(x=>x.id===id);
+  if (!r) return;
+  editingId = id;
+  document.getElementById('editMsg').value = r.msg;
+  document.getElementById('editCat').value = r.cat;
+  const d = new Date(r.fireAt);
+  document.getElementById('editDate').value = d.toISOString().split('T')[0];
+  document.getElementById('editTime').value = d.toTimeString().slice(0,5);
+  document.getElementById('editOverlay').classList.add('open');
+}
+
+function closeEditModal() {
+  document.getElementById('editOverlay').classList.remove('open');
+  editingId = null;
+}
+
+function saveEdit() {
+  const r = reminders.find(x=>x.id===editingId);
+  if (!r) return;
+  const msg = document.getElementById('editMsg').value.trim();
+  const cat = document.getElementById('editCat').value;
+  const date = document.getElementById('editDate').value;
+  const time = document.getElementById('editTime').value;
+  if (!msg) { showToast('כתוב מה להזכיר'); return; }
+  if (!date||!time) { showToast('בחר תאריך ושעה'); return; }
+  r.msg = msg;
+  r.cat = cat;
+  r.fireAt = new Date(date + 'T' + time).getTime();
+  r.fired = false;
+  r.done = false;
+  save(); render();
+  closeEditModal();
+  showToast('התזכורת עודכנה!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('editOverlay').addEventListener('click', function(e){
+    if(e.target===this) closeEditModal();
+  });
+  document.getElementById('overlay').addEventListener('click', function(e){
+    if(e.target===this) closeModal(false);
+  });
+});
+
+</script>
+</body>
+</html>
